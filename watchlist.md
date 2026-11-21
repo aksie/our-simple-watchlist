@@ -431,7 +431,7 @@ Tussen haakjes staat een notitie. #movie, #series of #podcast is het soort; ande
 - [ ] Queen of Katwe (2016, Mira Nair) #movie #cosy #feelgood #biopic #drama +2026-11-21
 - [ ] Moonrise Kingdom (2012, Wes Anderson, IMDb 7.8) #movie #cosy #feelgood #comedy #drama +2026-11-21
 - [ ] Brooklyn (2015, John Crowley, IMDb 7.5) #movie #cosy #feelgood #drama #romance +2026-11-21
-- [ ] Bend it like beckham (2002, Gurinder Chadha, IMDb 6.7) #movie #cosy #feelgood #comedy #sport +2026-11-21
+- [x] 🎈 Bend it like beckham (2002, Gurinder Chadha, IMDb 6.7) #movie #cosy #feelgood #comedy #sport +2026-11-21
 - [ ] The Muppet Movie (1979, James Frawley, IMDb 7.6) #movie #cosy #feelgood #family #musical +2026-11-21
 - [ ] Kamome Diner (2006, Naoko Ogigami, IMDb 7.2) #movie #cosy #feelgood #comedy #drama +2026-11-21
 - [ ] Singin' in the Rain (1952, Gene Kelly & Stanley Donen, IMDb 8.3) #movie #cosy #feelgood #musical #comedy +2026-11-21
