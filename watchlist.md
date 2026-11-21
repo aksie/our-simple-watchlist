@@ -423,18 +423,6 @@ Tussen haakjes staat een notitie. #movie, #series of #podcast is het soort; ande
 - [x] No good men (afghaanse romcom bios) #movie
 - [ ] Youth (HBO) #series
 - [ ] East of Eden (serie netflix) #series
-- [ ] Adults (serie disney) #series
-- [ ] Wild horse nine (bios) #movie
-- [x] 🎈 Small prophets (apple tv) #series
-- [ ] Wildwood (stopmotion, bios) #movie
-- [ ] Lupin 4 (netflix) #series
-- [ ] Gone (misdaad op kostschool, NPO) #series
-- [x] 🎈 The cycle of love (bios) #movie
-- [ ] All of a sudden (bios) #movie
-- [ ] Just an Illusion (makers van intouchable) #movie
-- [ ] Black doves (serie netflix) #series
-- [ ] Club kid (bios) #movie
-- [ ] Tony (bios, Anthony Bourdain) #movie
 - [x] Maria #movie #muziekfilm
 - [x] Bob dylanfilm #movie #muziekfilm
 - [x] Emily in Paris (netflix) #series https://www.netflix.com/nl/title/81037371
@@ -448,4 +436,16 @@ Tussen haakjes staat een notitie. #movie, #series of #podcast is het soort; ande
 - [ ] Kamome Diner (2006, Naoko Ogigami) #movie #cosy #feelgood +2026-11-21
 - [ ] Singin' in the Rain (1952, Gene Kelly & Stanley Donen) #movie #cosy #feelgood +2026-11-21
 - [ ] The Straight Story (1999, David Lynch) #movie #cosy #feelgood +2026-11-21
+- [ ] Adults (serie disney) #series
+- [ ] Wild horse nine (bios) #movie
+- [x] 🎈 Small prophets (apple tv) #series
+- [ ] Wildwood (stopmotion, bios) #movie
+- [ ] Lupin 4 (netflix) #series
+- [ ] Gone (misdaad op kostschool, NPO) #series
+- [x] 🎈 The cycle of love (bios) #movie
+- [ ] All of a sudden (bios) #movie
+- [ ] Just an Illusion (makers van intouchable) #movie
+- [ ] Black doves (serie netflix) #series
+- [ ] Club kid (bios) #movie
+- [ ] Tony (bios, Anthony Bourdain) #movie
 - [ ] Coherence #movie +2026-11-21
