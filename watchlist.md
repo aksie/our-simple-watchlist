@@ -397,28 +397,28 @@ Tussen haakjes staat een notitie. #movie, #series of #podcast is het soort; ande
 - [x] Finding Emily (romcom bios) #movie
 - [ ] A useful ghost (bios) #movie
 - [ ] The narrow road to the deep north (serie) #series
-- [ ] Los domingos (film) #movie
-- [ ] The presidents cake (film) #movie
+- [ ] Los domingos (film, 2025, Alauda Ruiz de Azúa, IMDb 7.3) #movie #drama
+- [ ] The presidents cake (film, 2025, Hasan Hadi, IMDb 7.6) #movie #drama
 - [x] Rivals 2 (serie disney) #series
-- [ ] A sad snd beautifil world (film) #movie
+- [ ] A sad snd beautifil world (film, 2025, Cyril Aris, IMDb 7.6) #movie #romance #drama
 - [ ] Etty (serie NPO) #series
-- [ ] Joe speedboat #movie
-- [ ] Resurrection (film) #movie
+- [ ] Joe speedboat (2026, Sam de Jong, IMDb 7.3) #movie #drama
+- [ ] Resurrection (film, 2025, Bi Gan, 2h40, IMDb 7.3) #movie #scifi #drama
 - [x] Calle Malaga (film) #movie
 - [ ] Alice and Steve (serie disney) #series
 - [ ] Proud (serie HBO) #series
-- [ ] The portugese house (film) #movie
+- [ ] The portugese house (film, 2025, Avelina Prat) #movie #drama
 - [x] The Odyssey (film) #movie
 - [x] Ted Lasso (seizoen 4) #series
 - [x] 🎈 The other bennet sister (HBO) #series
 - [ ] Bovensloters (brabantse misdaad komedie NPO) #series
 - [ ] Sterling Point (young adult Prime) #series
 - [x] On a string (komedie violiste, bios) #movie
-- [ ] Tekkonkinkreet (animatie) #movie https://www.instagram.com/reel/DZYcAvpMMw0/?igsi=MWJnN3I4OG4zMDJqcA==
+- [ ] Tekkonkinkreet (animatie, 2006, Michael Arias, IMDb 7.5) #movie #animation https://www.instagram.com/reel/DZYcAvpMMw0/?igsi=MWJnN3I4OG4zMDJqcA==
 - [x] 🎈 Rivals of amziah king (film) #movie
-- [ ] Sunny dancer (film) #movie
+- [ ] Sunny dancer (film, 2026, George Jaques, IMDb 7.2) #movie #comedy #drama
 - [x] My brilliant carreer (netflix) #series
-- [ ] The final set (docu Evert en Navratilova) #movie
+- [ ] The final set (docu Evert en Navratilova, 2026, Rebecca Gitlitz, Netflix) #movie #documentary #sport
 - [ ] Slow horses (apple tv) #series
 - [x] No good men (afghaanse romcom bios) #movie
 - [ ] Youth (HBO) #series
@@ -427,25 +427,25 @@ Tussen haakjes staat een notitie. #movie, #series of #podcast is het soort; ande
 - [x] Bob dylanfilm #movie #muziekfilm
 - [x] Emily in Paris (netflix) #series https://www.netflix.com/nl/title/81037371
 - [x] Kiki’s delivery service (netflix anime, 1989, Hayao Miyazaki) #movie #cosy #feelgood
-- [ ] Babe (1995, Chris Noonan) #movie #cosy #feelgood +2026-11-21
-- [ ] Queen of Katwe (2016, Mira Nair) #movie #cosy #feelgood +2026-11-21
-- [ ] Moonrise Kingdom (2012, Wes Anderson) #movie #cosy #feelgood +2026-11-21
-- [ ] Brooklyn (2015, John Crowley) #movie #cosy #feelgood +2026-11-21
-- [ ] Bend it like beckham (2002, Gurinder Chadha) #movie #cosy #feelgood +2026-11-21
-- [ ] The Muppet Movie (1979, James Frawley) #movie #cosy #feelgood +2026-11-21
-- [ ] Kamome Diner (2006, Naoko Ogigami) #movie #cosy #feelgood +2026-11-21
-- [ ] Singin' in the Rain (1952, Gene Kelly & Stanley Donen) #movie #cosy #feelgood +2026-11-21
-- [ ] The Straight Story (1999, David Lynch) #movie #cosy #feelgood +2026-11-21
+- [ ] Babe (1995, Chris Noonan, IMDb 6.9) #movie #cosy #feelgood #family #comedy +2026-11-21
+- [ ] Queen of Katwe (2016, Mira Nair) #movie #cosy #feelgood #biopic #drama +2026-11-21
+- [ ] Moonrise Kingdom (2012, Wes Anderson, IMDb 7.8) #movie #cosy #feelgood #comedy #drama +2026-11-21
+- [ ] Brooklyn (2015, John Crowley, IMDb 7.5) #movie #cosy #feelgood #drama #romance +2026-11-21
+- [ ] Bend it like beckham (2002, Gurinder Chadha, IMDb 6.7) #movie #cosy #feelgood #comedy #sport +2026-11-21
+- [ ] The Muppet Movie (1979, James Frawley, IMDb 7.6) #movie #cosy #feelgood #family #musical +2026-11-21
+- [ ] Kamome Diner (2006, Naoko Ogigami, IMDb 7.2) #movie #cosy #feelgood #comedy #drama +2026-11-21
+- [ ] Singin' in the Rain (1952, Gene Kelly & Stanley Donen, IMDb 8.3) #movie #cosy #feelgood #musical #comedy +2026-11-21
+- [ ] The Straight Story (1999, David Lynch, IMDb 8.0) #movie #cosy #feelgood #drama +2026-11-21
 - [ ] Adults (serie disney) #series
-- [ ] Wild horse nine (bios) #movie
+- [ ] Wild horse nine (bios, 2026, Martin McDonagh) #movie #comedy #thriller
 - [x] 🎈 Small prophets (apple tv) #series
-- [ ] Wildwood (stopmotion, bios) #movie
+- [ ] Wildwood (stopmotion, bios, 2026, Travis Knight) #movie #animation #fantasy
 - [ ] Lupin 4 (netflix) #series
 - [ ] Gone (misdaad op kostschool, NPO) #series
 - [x] 🎈 The cycle of love (bios) #movie
-- [ ] All of a sudden (bios) #movie
-- [ ] Just an Illusion (makers van intouchable) #movie
+- [ ] All of a sudden (bios, 2026, Ryûsuke Hamaguchi, 3h16) #movie #drama
+- [ ] Just an Illusion (makers van intouchable, 2026, Olivier Nakache & Éric Toledano) #movie #comedy #drama
 - [ ] Black doves (serie netflix) #series
-- [ ] Club kid (bios) #movie
-- [ ] Tony (bios, Anthony Bourdain) #movie
-- [ ] Coherence #movie +2026-11-21
+- [ ] Club kid (bios, 2026, Jordan Firstman) #movie #comedy #drama
+- [ ] Tony (bios, Anthony Bourdain, 2026, Matt Johnson) #movie #biopic #drama
+- [ ] Coherence (2013, James Ward Byrkit, IMDb 7.2) #movie #scifi #thriller +2026-11-21
