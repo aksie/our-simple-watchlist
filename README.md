@@ -14,3 +14,13 @@ A shared list of films, series and podcasts to watch, with a small page to tick 
 
 `[ ]` is not seen, `[x]` is seen, a balloon after the box means we loved it.
 `#movie`, `#series` or `#podcast` sets the type; any other `#word` is a label.
+
+## Licence
+
+The code of the page (`index.html` and `core.js`) is free software under the
+GNU Affero General Public License, version 3 (`AGPL-3.0-only`). You may use,
+change and share it; if you distribute it or run a changed version for others,
+you must publish your source under the same licence. See the `LICENSE` file.
+
+`watchlist.md` is our own list and is not part of that offer. If you fork this,
+replace it with your own.
