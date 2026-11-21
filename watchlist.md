@@ -1,0 +1,450 @@
+# Watchlist
+
+Eén regel per titel, nieuwste onderaan. [ ] = nog niet gezien, [x] = gezien, 🎈 = geweldig.
+Tussen haakjes staat een notitie. #movie, #series of #podcast is het soort; andere #woorden zijn labels.
+
+- [ ] Niet van de wereld #podcast
+- [ ] Serge Simonart #podcast
+- [ ] Electra #podcast
+- [ ] What went wrong #podcast
+- [ ] De kunst van het verdwijnen 2 #podcast
+- [ ] A tiny plot #podcast
+- [ ] Podcast walk: Simone en de roofstaat #podcast
+- [ ] De vondeling #podcast
+- [ ] Natalie Haynes Stands Up for the Classics #podcast
+- [ ] Extraordinary Attorney Woo (januari 2023) #series https://www.netflix.com/nl/title/81518991
+- [ ] Ginny + Georgia (januari 2023) #series
+- [ ] Odio il Natale (januari 2023) #series https://www.netflix.com/nl/title/81414648
+- [ ] Modern Love Amsterdam (prime, januari 2023) #series
+- [ ] Endeavour Morse (NPO, januari 2023) #series https://www.npostart.nl/POW_00823269
+- [ ] OLVG Ziekenhuis met een hart (NPO, januari 2023) #series https://www.npostart.nl/BV_101408817
+- [ ] Camilla Läckberg's Fjällbacka Murders (NPO, misschien kijken) #series https://www.npostart.nl/POW_00848081
+- [ ] Margrete: Queen of the North (NPO, misschien kijken) #movie https://www.npostart.nl/POW_05321617
+- [ ] Borgen (misschien kijken) #series
+- [ ] F1 Drive to Survive (netflix) #series #sport
+- [ ] Saturday Night Fever #movie #muziekfilm
+- [ ] 20 Feet from Stardom #movie #muziekfilm
+- [ ] Joni Mitchell documentaire #movie #muziekfilm
+- [ ] Love and Mercy (beach boys/brian wilson) #movie #muziekfilm
+- [ ] Amy (winehouse) #movie #muziekfilm
+- [ ] Sideways #movie
+- [x] Chef #movie
+- [x] Eternal sunshine of the spotless mind #movie
+- [x] Good bye Lenin #movie
+- [ ] The revenant #movie
+- [ ] Etre et avoir #movie
+- [ ] The kids are all right #movie
+- [ ] Amsterdam wildlife #movie
+- [ ] Nocturnal animals #movie
+- [ ] Juno #movie
+- [x] Billy Elliot #movie
+- [x] 20th century women #movie
+- [ ] Lord of the rings/ the hobbit #movie
+- [x] Lalaland #movie
+- [x] Intouchables #movie
+- [x] Call me by your name #movie
+- [ ] Burning f r #movie
+- [ ] The sisters brothersy #movie
+- [ ] Garden state #movie
+- [ ] Liebe in den Gängen #movie
+- [ ] The last emperor #movie
+- [x] The favourite #movie
+- [ ] Claires camera (isabelle Huppert) #movie
+- [ ] Nureyev #movie
+- [ ] A rainy day in New York (woody allen) #movie
+- [x] Dolor y Gloria (Almodovar) #movie
+- [ ] James bondfilms #movie
+- [x] Portrait de la jeune fille en feu #movie
+- [ ] And then we danced #movie
+- [x] Forrest Gump #movie
+- [ ] Blues Brothers #movie
+- [ ] Fuckin Amal/ show me love youtube #movie
+- [x] Merlin (netflixserie) #series
+- [x] The farewell (lulu wang,sundancefestival) #movie
+- [x] Parasite (koreaans, gouden palm) #movie
+- [x] Hamilton (the musical) #movie
+- [ ] Rent (the musical) #movie
+- [ ] Fame Fame by Alan Parker #movie https://itunes.apple.com/nl/movie/fame/id555611615?l=en
+- [ ] Flashdance #movie
+- [x] La belle epoque #movie
+- [x] Little women #movie
+- [ ] Vroid (programma voor anime) #movie
+- [x] Weathering with you (anime over tienerliefde) #movie
+- [x] Spirited away #movie
+- [ ] Terug naar de Akbarstraat #series
+- [x] La verite (juliette binoche ethan hawke) #movie
+- [x] The big sick (romcom 4 sterren nrc) #movie
+- [x] The secret garden (jeugd 4 sterren) #movie
+- [ ] House of Hummingbird (over 14-jarig Koreaans meisje) #movie
+- [ ] Ete 85 (ozon) #movie
+- [x] David Copperfield #movie
+- [ ] Jeanne d’Arc (bruno dumont) #movie
+- [x] Sweet thing #movie
+- [x] Calamity (tekenfilm over calamity Jane) #movie
+- [x] Babyteeth #movie
+- [x] Happiest season (kerstfilm) #movie
+- [x] Soul (pixar, disney+) #movie
+- [x] Love Sarah (bakkerij) #movie
+- [x] Knives out #movie
+- [ ] Wolf walkers #movie
+- [x] Captain fantastic #movie
+- [x] The lunchbox #series
+- [x] Ramen shop #movie
+- [x] Honeyland picl #movie
+- [ ] For sama #movie
+- [ ] Harold and Maud #movie
+- [x] Wendy (peter pan op vulkaan, sundance, picl) #movie
+- [x] Beasts of the southern wild (zelfde regisseur) #movie
+- [x] Nomadland #movie
+- [x] First cow #movie
+- [x] Petit maman #movie
+- [ ] Give me liberty #movie
+- [x] In the heights (musical) #movie
+- [x] Strawberry mansion #movie
+- [ ] Meskina #movie
+- [ ] Judas and the black messias (black panther/blm) #movie
+- [ ] Undine #movie
+- [ ] Tre piani #movie
+- [ ] Cry macho #movie
+- [x] Riders of justice #movie
+- [x] Pig #movie
+- [x] The power of the dog (Jane Campion/ Benedict Cumberbatch, netflix) #movie
+- [x] BuZa (npo3) #series
+- [x] The hand of God (netflix) #movie
+- [x] West side story #movie
+- [ ] Klassen (npo) #series
+- [ ] Wonderboys #movie
+- [ ] The father anthony hopkins #movie
+- [x] The tender bar (amazon) #movie
+- [x] The last duel (me too ridders ben sffleck matt damon) #movie
+- [x] Murder on the orient express #movie
+- [x] Zina (serie NPO) #series
+- [ ] The electrical life of Louis Wain (picl, biopic met Benedict Cumberbatch) #movie
+- [ ] Shabu (feelgood jeugddocu Rotterdam) #movie
+- [ ] Hamlet #movie https://www.cbr.com/every-filmed-hamlet-ranked-according-critics/
+- [x] The worst person in the world #movie
+- [ ] Belfast #movie
+- [x] The Duke #movie
+- [x] Madres Paralelas #movie
+- [x] King Richard #movie
+- [x] 🎈 Drole (netflix) #series
+- [x] Ninjababy #movie
+- [ ] We own this city (HBO, makers van the wire) #series
+- [x] Everything everywhere all at once #movie
+- [x] Delicieux #movie
+- [x] 🎈 Better things (disney+) #series
+- [x] 🎈 It’s a sin #series
+- [x] 🎈 This is going to hurt #series
+- [ ] Kokon #movie
+- [x] Decision to leave (Koreaanse neo noir) #movie
+- [x] See how they run (agatha christie) #movie
+- [ ] Magnolia #movie
+- [ ] American beauty #movie
+- [ ] Titanic #movie
+- [ ] Schindlers list #movie
+- [x] Being John Malkovich #movie
+- [ ] Bros #movie
+- [ ] Boiling point (kookfilm) #movie
+- [ ] The menu #movie
+- [x] Close #movie
+- [ ] Reboot (comedy disney+) #series
+- [ ] Mythic Quest (serie over videogame makers Apple TV) #series
+- [x] Bones and all (timothee chalamet) #movie
+- [x] Lampje (npo+) #movie
+- [ ] The souvenir (tilda swinton, netflix) #movie
+- [ ] The fabelmans (biopic steven spielberg) #movie
+- [x] Glass onion (netflix, opvolger knives out) #movie
+- [x] Julestorm #series
+- [x] Strange wordl (disney) #movie
+- [ ] Corsage (sissy op leeftijd) #movie
+- [x] Mathilda #movie
+- [ ] Knor #movie
+- [ ] Sing street #movie
+- [x] 🎈 Abbott Elementary (Disney +) #series
+- [x] Broker #movie
+- [ ] Babylon #movie
+- [x] Falcon lake #movie
+- [x] The banshees of Inisherin #movie
+- [x] En Place (komedieserie netflix) #series
+- [x] Fleishman is in trouble (disney+) #series
+- [x] 🎈 Somebody somewhere (comedy hbo) #series
+- [x] Lidia Poet (kostuum detective netflix) #series
+- [x] Strike (detective hbo naar boeken van jk rowling) #series
+- [x] Aftersun #movie
+- [x] 🎈 Daisy jones and the six (muziekserie amazon) #series
+- [ ] Tár #movie
+- [x] Eo #movie
+- [x] Empire of light #movie
+- [ ] Cast (NPO satire van makers van luizenmoeder) #series
+- [ ] Blind willow sleeping woman (anime) #movie
+- [ ] Panduloria (NL absurdistische comedy, prime) #movie
+- [ ] Dying to live #movie
+- [ ] The responder (detective NPO) #series
+- [ ] Karen Pirie (detective NPO) #series
+- [ ] The English (western Emily Blunt disney) #series
+- [x] The quiet girl (film) #movie
+- [ ] The good mothers (maffia, disney) #series
+- [ ] The diplomat (serie netflix) #series
+- [x] 🎈 The pot au feu (la passion de dodin bouffant, kookfilm) #movie
+- [ ] De droom van de jeugd (NPO serie, zie foto van parool 9/6/2022) #series
+- [ ] And just like that (sex and the city spinoff, hbo) #series
+- [ ] Mon Crime (picl, Franse detective, grappig) #movie
+- [ ] Pacifiction (picl, thriller) #movie
+- [ ] Dertigers (serie NPO) #series
+- [ ] Elemental (nieuwe pixat) #movie
+- [x] Oppenheimer #movie
+- [x] Barbie #movie
+- [x] Napoleon #movie
+- [x] Juniper #movie
+- [x] 🎈 Living #movie
+- [x] 🎈 Good luck to you Leo grande #movie
+- [x] 🎈 Strange way of life (Almodovar) #movie
+- [x] Totem (film) #movie
+- [ ] Yuni (film) #movie
+- [ ] Afterglow (serie, NPO) #series
+- [ ] Scicario (van yellowstone gast) #movie
+- [x] 🎈 Past Lives (film) #movie
+- [ ] Three musketeers (film) #movie
+- [ ] Reservation dogs (disney+) #series
+- [x] The wonderful story of Henry Sugar (roald dahl netflix) #movie
+- [x] Lupin (seizoen 3, netflix) #series
+- [ ] Bij ons op het AZC (NPO) #series
+- [x] Lessons in chemistry (apple tv) #series
+- [ ] All the light we cannot see (Netflix) #series
+- [ ] Maud en Babs (npo) #series
+- [x] Robby Williams (netflix, 5 sterren volkskrant, S) #series
+- [x] Perfect Days (wim wenders) #movie
+- [ ] Nieuwe woody allen #movie
+- [x] 🎈 Fallen leaves #movie
+- [ ] May December (julianne moore en Natalie portman) #movie
+- [ ] Jippie no more (feelgood cinekid) #movie
+- [x] Tout va bien (ziekenhuisserie disney+) #series
+- [x] The old oak #movie
+- [x] Anatomy of a fall #movie
+- [x] Wonka #movie
+- [x] 🎈 The brothers sun (actie komedie serie netflix) #series
+- [ ] Vincent doit mourir #movie
+- [ ] She came to me #movie
+- [ ] Monster (Kore-Eda, bios) #movie
+- [x] The zone of interest (bios) #movie
+- [ ] Boy swallows universe (series netflix) #series
+- [x] 🎈 All of us strangers (bios) #movie
+- [x] Poor things (Emma Stone, bios, Emma Stone) #movie
+- [ ] Zero Gravity (over Wayne Shorter op Amazon) #movie
+- [x] 🎈 Orlando #movie
+- [ ] Supernova (2020) #movie
+- [ ] Drops of God (apple+) #series
+- [ ] Mr and mrs Smith (actiespionnen series amazon prime) #series
+- [ ] Mrs Maisel 5 (amazon prime) #series
+- [x] One Day (netflix, - levens blijven verbonden, boekverfilim) #series
+- [ ] Dreaming whilst black (Serie, NPO) #series
+- [x] Shogun (disney+) #series
+- [ ] The Gentlemen (wietplantage op Engels landgoed, 8,4 op imdb) #series
+- [ ] De Joodse raad (NPO) #series
+- [x] 🎈 Bodem (NPO) #series
+- [ ] Oogappels (NPO) #series
+- [x] Hacks 3 (hbo) #series
+- [ ] Dream scenario (met Nicolas cage, bios) #movie
+- [ ] Banel & Adama (bios) #movie
+- [x] Food: the hundred foot yourney, An, Bella Martha #movie
+- [x] La chimera (bios, archeologen) #movie
+- [x] Ronja de roversdochter (serie netflix) #series
+- [ ] Abbott elementary 3 (disney) #series
+- [ ] Sugar (detective apple tv+) #series
+- [ ] The talented mr Ripley (netflix) #series
+- [ ] Housekeeping for beginners (queer Roma drama comedy bios) #movie
+- [x] Love lies bleeding (queer neo noir 5ballenNRC bios) #movie
+- [ ] The sympathizer (vietnamese spion HBO) #series
+- [ ] Dead boy detectives (serie netflix) #series
+- [x] Bridgerton (netflix) #series
+- [ ] Rotown (npo) #series
+- [ ] The hitman (richard linklatter) #movie
+- [ ] Extraordinary (disney+) #series
+- [ ] Amor y matematicas #movie
+- [ ] Showing up #movie
+- [ ] Presumed innocence (jake gyllenhaal heel spannend) #series
+- [x] The Bear (plex, sterrenchef redt familierestaurant, seizoen 3) #series
+- [ ] The lady in the lake (serie Nathalie Portman, apple+) #series
+- [ ] What we do in the shadows (serie vampiercomedy disney+) #series
+- [x] A good girls guide to murder (netflix) #series
+- [x] Head South (punkband coming of age film, muziek/coming of age Picl) #movie
+- [ ] After life (serie, netflix) #series
+- [ ] Minx (serie, HBO) #series
+- [ ] Industry (series, HBO) #series
+- [ ] House of the dragon (game of thrones prequel, hbo) #series
+- [x] Pachinko (apple tv, appletv) #series
+- [ ] Bad monkey (appletv) #series
+- [x] Only murders (Disney) #series
+- [x] Lost boys and fairies (NPO) #series
+- [ ] Kijken in de ziel (Coen Verbraak) #series
+- [ ] Kaos (serie netflix) #series
+- [x] 🎈 English teacher (disney, serie) #series
+- [ ] The perfect couple (murder mysteries series netflix) #series
+- [x] Nobody wants this (romcom series netflix) #series
+- [x] Wicked little letters (film netflix) #movie
+- [x] 🎈 Rivals (disney+, over britse mediawereld in jaren 80) #series
+- [ ] My brilliant friend (HBO) #series
+- [ ] Hein (npo) #series
+- [ ] Say nothing (Disney+) #series
+- [x] Shrinking (appletv) #series
+- [x] A man on the inside (netflix) #series
+- [x] Widow Cliquot (film) #movie
+- [ ] Gloria (film) #movie
+- [ ] La Cocina (film) #movie
+- [x] The sticky (fargo achtig amazon) #series
+- [ ] 100jaar eenzaamheid (netflix) #series
+- [x] The room nextdoor (Almodovar) #movie
+- [x] 🎈 The holdovers (kerstig!) #movie
+- [ ] Joan (serie NPO) #series
+- [ ] Bodkin (netflix, misdaad/dark comedy netflix) #series
+- [x] The Pitt (Hbo ziekenhuis) #series
+- [x] Bridget jones #movie
+- [ ] Asura (serie netflix Kore Eda) #series
+- [ ] Severance (apple TV+) #series
+- [x] 🎈 Mo (seizoen 2, netflix) #series
+- [x] All we imagine as light (film) #movie
+- [x] Hard truths (film Mike Leigh) #movie
+- [ ] The resident (serie netflix moord witte huis) #series
+- [x] Nickel Boys (film, amazon) #movie
+- [ ] Il gattopardo/the leopard (netflix, kostuumdrama Italiaanse adel) #series
+- [x] Everybody loves Touda (film Marokkaanse zangeres) #movie
+- [ ] Chateau promenade (satire NPO) #series
+- [ ] We are ladyparts (moslima’s in rockband NPO) #series
+- [x] 🎈 Vingt dieux (coming of age over kaasmakers) #movie
+- [ ] The studio (Apple tv+ Hollywoodsatire) #series
+- [ ] Dying for sex (disney+) #series
+- [ ] The other way around (film) #movie
+- [x] Black dog (film) #movie
+- [ ] Puzzle (film, producer little miss sunshine) #movie
+- [ ] Etoile (serie, prime) #series
+- [x] Dag en nacht (NPO kim van kooten verloskundige, seizoen 2, NPO ziekenhuis) #series
+- [ ] The righteous gemstones (HBO) #series
+- [ ] Good one (film) #movie
+- [ ] Careme (apple tv+, serie over kok) #series
+- [ ] Sirens (miniserie netflix, Julianne Moore) #series
+- [ ] The long way home (apple tv+, - aanrader Danielle Kliwon) #series
+- [ ] Toxic town #series
+- [ ] Mr bates vs the post office (serie, NPO) #series
+- [ ] Tokyo vice (misdaad, hbo) #series
+- [ ] The gold (goudroof NPO) #series
+- [x] Materialists (film van regisseur Past Lives) #movie
+- [x] 🎈 Ludwig (NPO) #series
+- [x] 🎈 The gilded age (HBO, seizoen 3) #series
+- [ ] L’ avenue de l’avenir (franse kostuumfilm, bios) #movie
+- [ ] Too much (comedyserie netflix) #series
+- [ ] A gentleman in moscow (serie naar tof boek, sky showtime) #series
+- [ ] Elsbeth (spinoff van good wife, drukke mevrouw lost murder mysteries op) #series
+- [ ] Super happy forever (film) #movie
+- [ ] Poker face (serie sky showtime) #series
+- [ ] Washington Black (kostuumdrama serie disney) #series
+- [ ] The naked gun #movie
+- [ ] Chief of war (apple+, over kolonisatie van hawaii) #series
+- [ ] Leanne (serie, netflix) #series
+- [ ] Outrageous miniseries BBC nl+ #series
+- [ ] Jeune meres (film) #movie
+- [x] Sorry baby (film) #movie
+- [ ] Enzo (film) #movie
+- [x] Downton abbey #movie
+- [ ] A nice Indian boy (film, filmhuisromcom) #movie
+- [ ] Writing Hawa (docu Afghaanse vrouwen) #movie
+- [ ] Die zweiflers (serie NPO) #series
+- [ ] Kleo (komische thrillerserie netflix) #series
+- [ ] Task (serie thriller HbO) #series
+- [x] The blue trail (bios) #movie
+- [ ] Do you love me (idfa) #movie
+- [ ] Stenbeck (zweedse mediamagnaat nPO) #series
+- [x] House of Guinness (netflix serie) #series
+- [x] Deliver me frim nowhere (biopic Springsteen) #movie
+- [ ] Roofman (film) #movie
+- [ ] Porte bagage (film) #movie
+- [x] Drømmer (film) #movie
+- [ ] Jay Kelly (film Clooney) #movie
+- [ ] Eleanor the great #movie
+- [ ] Down cemetery road (detective Emma thompson Apple+) #series
+- [ ] The abandons (netflix) #series
+- [ ] The end of an era (documentary Taylor Swift, disney) #series
+- [ ] The night manager (prime video, aanrader danielle kliwon van hard gras, spionageserie) #series
+- [x] 🎈 The Lowdown (thriller Ethan Hawk disney+) #series
+- [ ] Blue moon (film ethan hawk/richard linktlater) #movie
+- [ ] The love that remains (film ijsland) #movie
+- [ ] The industru (serie, hbo) #series
+- [ ] I fought the law (NPO) #series
+- [x] Game of thrones spinoffs a knight of seven kingdoms (hbo) #series
+- [ ] Heated rivalry (HBO ijshockey gay romance) #series
+- [x] How to get to heaven from Belfast (netflix thriller/komisch) #series
+- [x] Sound of falling (film) #movie
+- [x] Sirat (film) #movie
+- [ ] Meer dan Babi pangang (docu) #movie
+- [ ] Wuthering heights (film) #movie
+- [x] Gioia mia (film) #movie
+- [ ] Rust en vreugd (serie NPO) #series
+- [x] Dtf st Louis (Serie, hbo) #series
+- [x] Rooster (komedie HBO, maker van Ted Lasso) #series
+- [ ] Maigret (detective Prime) #series
+- [ ] Young sherlock (prime) #series
+- [ ] Jo nesbo detective Hole (netflix) #series
+- [ ] The comeback (HBO, comedy met Phoebe) #series
+- [x] The history of sound (film met Paul Mescal) #movie
+- [ ] Bait (comedy prime) #series
+- [ ] Dark winds (netflix) #series
+- [ ] Vladimir (netflix) #series
+- [ ] Romeria (bios) #movie
+- [ ] Pluribus (serie, van makers van breaking bad) #series
+- [x] L’engloutie (bios) #movie
+- [x] Margo’s got money troubles (apple tv) #series
+- [ ] Mocros (NPO) #series
+- [x] Hacks (hbo) #series
+- [x] Finding Emily (romcom bios) #movie
+- [ ] A useful ghost (bios) #movie
+- [ ] The narrow road to the deep north (serie) #series
+- [ ] Los domingos (film) #movie
+- [ ] The presidents cake (film) #movie
+- [x] Rivals 2 (serie disney) #series
+- [ ] A sad snd beautifil world (film) #movie
+- [ ] Etty (serie NPO) #series
+- [ ] Joe speedboat #movie
+- [ ] Resurrection (film) #movie
+- [x] Calle Malaga (film) #movie
+- [ ] Alice and Steve (serie disney) #series
+- [ ] Proud (serie HBO) #series
+- [ ] The portugese house (film) #movie
+- [x] The Odyssey (film) #movie
+- [x] Ted Lasso (seizoen 4) #series
+- [x] 🎈 The other bennet sister (HBO) #series
+- [ ] Bovensloters (brabantse misdaad komedie NPO) #series
+- [ ] Sterling Point (young adult Prime) #series
+- [x] On a string (komedie violiste, bios) #movie
+- [ ] Tekkonkinkreet (animatie) #movie https://www.instagram.com/reel/DZYcAvpMMw0/?igsi=MWJnN3I4OG4zMDJqcA==
+- [x] 🎈 Rivals of amziah king (film) #movie
+- [ ] Sunny dancer (film) #movie
+- [x] My brilliant carreer (netflix) #series
+- [ ] The final set (docu Evert en Navratilova) #movie
+- [ ] Slow horses (apple tv) #series
+- [x] No good men (afghaanse romcom bios) #movie
+- [ ] Youth (HBO) #series
+- [ ] East of Eden (serie netflix) #series
+- [ ] Adults (serie disney) #series
+- [ ] Wild horse nine (bios) #movie
+- [x] 🎈 Small prophets (apple tv) #series
+- [ ] Wildwood (stopmotion, bios) #movie
+- [ ] Lupin 4 (netflix) #series
+- [ ] Gone (misdaad op kostschool, NPO) #series
+- [x] 🎈 The cycle of love (bios) #movie
+- [ ] All of a sudden (bios) #movie
+- [ ] Just an Illusion (makers van intouchable) #movie
+- [ ] Black doves (serie netflix) #series
+- [ ] Club kid (bios) #movie
+- [ ] Tony (bios, Anthony Bourdain) #movie
+- [x] Maria #movie #muziekfilm
+- [x] Bob dylanfilm #movie #muziekfilm
+- [x] Emily in Paris (netflix) #series https://www.netflix.com/nl/title/81037371
+- [x] Kiki’s delivery service (netflix anime, 1989, Hayao Miyazaki) #movie #cosy #feelgood
+- [ ] Babe (1995, Chris Noonan) #movie #cosy #feelgood +2026-11-21
+- [ ] Queen of Katwe (2016, Mira Nair) #movie #cosy #feelgood +2026-11-21
+- [ ] Moonrise Kingdom (2012, Wes Anderson) #movie #cosy #feelgood +2026-11-21
+- [ ] Brooklyn (2015, John Crowley) #movie #cosy #feelgood +2026-11-21
+- [ ] Bend it like beckham (2002, Gurinder Chadha) #movie #cosy #feelgood +2026-11-21
+- [ ] The Muppet Movie (1979, James Frawley) #movie #cosy #feelgood +2026-11-21
+- [ ] Kamome Diner (2006, Naoko Ogigami) #movie #cosy #feelgood +2026-11-21
+- [ ] Singin' in the Rain (1952, Gene Kelly & Stanley Donen) #movie #cosy #feelgood +2026-11-21
+- [ ] The Straight Story (1999, David Lynch) #movie #cosy #feelgood +2026-11-21

@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Watchlist</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap">
+<style>
+/* Layout idea: one narrow column, a plain checklist like a note; controls stay out of the way. Single light theme by choice, close to a notes app. */
+:root {
+  color-scheme: light;
+  --ground: #FFFFFF;
+  --surface: #F5F4F0;
+  --line: #E4E2DC;
+  --edge: #8E8B84;
+  --ink: #1C1C1E;
+  --muted: #5F5E5A;
+  --accent: #F2B84B;
+  --on-accent: #1C1C1E;
+  --accent-ink: #8A5A00;
+  --warn: #B3261E;
+  --display: 'Space Grotesk', Inter, system-ui, sans-serif;
+  --body: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.35; -webkit-text-size-adjust: 100%; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+.app { height: 100%; max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; }
+header { padding: 20px 20px 8px; display: flex; flex-direction: column; gap: 12px; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+h1 { margin: 0; font-family: var(--display); font-size: 26px; font-weight: 700; line-height: 44px; }
+.summary { font-size: 13px; color: var(--muted); margin-top: -8px; }
+.round { width: 44px; height: 44px; flex-shrink: 0; padding: 0; border: 1px solid var(--edge); border-radius: 22px; background: transparent; display: flex; align-items: center; justify-content: center; }
+.round[aria-expanded="true"] { background: var(--ink); border-color: var(--ink); color: var(--ground); }
+.round.add { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.topbtns { display: flex; gap: 8px; }
+.backdrop.top { align-items: flex-start; }
+.backdrop.top .sheet { border-radius: 0 0 24px 24px; border-top: 0; border-bottom: 1px solid var(--edge); padding-top: 24px; }
+.panel { display: flex; flex-direction: column; gap: 14px; padding: 16px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); }
+.panel[hidden] { display: none; }
+.group { display: flex; flex-direction: column; gap: 8px; }
+.label { font-size: 13px; font-weight: 600; color: var(--muted); }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid var(--edge); background: transparent; font-size: 13px; font-weight: 500; }
+.pill[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--ground); font-weight: 600; }
+.switch { display: flex; align-items: center; justify-content: space-between; min-height: 44px; font-size: 15px; font-weight: 500; }
+.switch input { width: 22px; height: 22px; accent-color: var(--accent); }
+.quiet { font-size: 13px; color: var(--muted); }
+.textbtn { min-height: 44px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--edge); background: transparent; font-size: 14px; font-weight: 500; }
+main { flex: 1; min-height: 0; overflow-y: auto; padding: 0 20px 12px; -webkit-overflow-scrolling: touch; }
+h2.type { margin: 8px 0 0; font-size: 13px; font-weight: 600; color: var(--muted); line-height: 32px; position: sticky; top: 0; background: var(--ground); z-index: 1; }
+ul { list-style: none; margin: 0; padding: 0; }
+.row { display: flex; align-items: center; min-height: 44px; }
+.tick { width: 44px; height: 44px; margin-left: -11px; flex-shrink: 0; padding: 0; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; }
+.tick span { width: 22px; height: 22px; border: 1.5px solid var(--edge); border-radius: 11px; display: flex; align-items: center; justify-content: center; color: var(--on-accent); }
+.tick[aria-checked="true"] span { background: var(--accent); border-color: var(--accent); }
+.tick svg { display: none; }
+.tick[aria-checked="true"] svg { display: block; }
+.title { flex: 1; min-width: 0; min-height: 44px; padding: 5px 0; border: 0; background: transparent; text-align: left; overflow-wrap: anywhere; }
+.title .note { font-size: 13px; color: var(--muted); margin-left: 6px; }
+.title .love { color: var(--accent-ink); vertical-align: -3px; margin-left: 6px; }
+.row.seen .title .name { color: var(--muted); }
+.info { width: 44px; height: 44px; margin-right: -9px; flex-shrink: 0; padding: 0; border: 0; background: transparent; color: var(--muted); display: flex; align-items: center; justify-content: center; }
+.info span { width: 26px; height: 26px; border: 1.5px solid var(--edge); border-radius: 13px; display: flex; align-items: center; justify-content: center; }
+.empty { padding: 32px 0; color: var(--muted); font-size: 15px; }
+footer { padding: 4px 20px 10px; background: var(--ground); }
+.field input::placeholder { color: var(--muted); }
+.toast { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); max-width: calc(100% - 40px); padding: 6px 6px 6px 16px; border-radius: 14px; background: var(--ink); color: var(--ground); font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; z-index: 5; }
+.toast[hidden] { display: none; }
+.toast button { min-height: 36px; padding: 0 12px; border: 0; border-radius: 10px; background: var(--ground); color: var(--ink); font-size: 14px; font-weight: 600; }
+.toast span { padding: 8px 10px 8px 0; }
+.backdrop { position: fixed; inset: 0; background: rgba(28, 28, 30, 0.42); z-index: 10; display: flex; align-items: flex-end; justify-content: center; }
+.backdrop[hidden] { display: none; }
+.sheet { width: 100%; max-width: 560px; max-height: 88%; overflow-y: auto; padding: 20px 20px 24px; border-radius: 24px 24px 0 0; background: var(--surface); border-top: 1px solid var(--edge); display: flex; flex-direction: column; gap: 14px; }
+.sheet h2 { margin: 0; font-family: var(--display); font-size: 21px; font-weight: 700; line-height: 27px; text-wrap: balance; overflow-wrap: anywhere; }
+.sheethead { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags:empty { display: none; }
+.tag { height: 30px; padding: 0 12px; border-radius: 15px; background: var(--line); font-size: 13px; font-weight: 500; display: flex; align-items: center; }
+.facts { display: flex; flex-direction: column; }
+.fact { display: flex; justify-content: space-between; gap: 16px; min-height: 40px; padding: 8px 0; align-items: baseline; border-bottom: 1px solid var(--line); }
+.fact dt { font-size: 13px; color: var(--muted); flex-shrink: 0; }
+.fact dd { margin: 0; font-size: 14px; font-weight: 500; text-align: right; overflow-wrap: anywhere; }
+.fact dd.later { color: var(--muted); font-weight: 400; }
+.fact a { color: var(--accent-ink); }
+dl { margin: 0; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.primary { height: 48px; flex: 1; padding: 0 16px; border: 0; border-radius: 14px; background: var(--accent); color: var(--on-accent); font-size: 15px; font-weight: 600; }
+.secondary { height: 48px; padding: 0 16px; border: 1px solid var(--edge); border-radius: 14px; background: transparent; font-size: 15px; font-weight: 500; }
+.secondary[aria-pressed="true"] { border-color: var(--accent-ink); color: var(--accent-ink); background: #FFF6DF; }
+.danger { color: var(--warn); }
+.edit { display: flex; flex-direction: column; gap: 12px; }
+.edit[hidden] { display: none; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 13px; font-weight: 500; color: var(--muted); }
+.field input { height: 48px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--edge); background: var(--ground); font-size: 16px; }
+.status { font-size: 12px; color: var(--muted); text-align: center; min-height: 16px; }
+.status.bad { color: var(--warn); }
+.banner { min-height: 44px; padding: 0 14px; border: 0; border-radius: 12px; background: #FFF1CC; color: var(--ink); font-size: 14px; font-weight: 600; text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.banner[hidden] { display: none; }
+.banner span:last-child { color: var(--accent-ink); }
+.cands { display: flex; flex-direction: column; }
+.cand { display: flex; align-items: center; gap: 10px; min-height: 48px; border-bottom: 1px solid var(--line); }
+.cand input[type="checkbox"] { width: 22px; height: 22px; flex-shrink: 0; accent-color: var(--accent-ink); }
+.cand input[type="text"] { flex: 1; min-width: 0; height: 44px; padding: 0; border: 0; background: transparent; font-size: 16px; }
+.cand small { font-size: 12px; color: var(--muted); flex-shrink: 0; }
+.msg { font-size: 13px; color: var(--muted); min-height: 18px; }
+.msg.bad { color: var(--warn); }
+@media (prefers-reduced-motion: no-preference) { .backdrop:not([hidden]) .sheet { animation: up 180ms ease-out; } }
+@keyframes up { from { transform: translateY(24px); opacity: 0.6; } to { transform: none; opacity: 1; } }
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="top">
+    <h1>Watchlist</h1>
+    <div class="topbtns">
+      <button class="round" id="filterBtn" aria-label="Filter and sort" aria-expanded="false" aria-controls="panel">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M7 12h10M10 17h4"/></svg>
+      </button>
+      <button class="round add" id="addBtn" aria-label="Add a title">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="summary" id="summary">Loading the list</div>
+  <button class="banner" id="inboxBanner" hidden><span id="inboxBannerText"></span><span>Review</span></button>
+  <div class="panel" id="panel" hidden>
+    <div class="group"><div class="label">Show</div><div class="pills" data-key="show">
+      <button class="pill" data-v="unseen">Not seen</button><button class="pill" data-v="seen">Seen</button><button class="pill" data-v="loved">We loved</button><button class="pill" data-v="all">Everything</button>
+    </div></div>
+    <div class="group"><div class="label">Type</div><div class="pills" data-key="type">
+      <button class="pill" data-v="all">All</button><button class="pill" data-v="movie">Movies</button><button class="pill" data-v="series">Series</button><button class="pill" data-v="podcast">Podcasts</button>
+    </div></div>
+    <div class="group"><div class="label">Sort</div><div class="pills" data-key="sort">
+      <button class="pill" data-v="added">Last added</button><button class="pill" data-v="az">A to Z</button>
+    </div></div>
+    <label class="switch" for="groupToggle"><span>Group by type</span><input type="checkbox" id="groupToggle"></label>
+    <div class="group">
+      <div class="quiet" id="storeNote"></div>
+      <div class="pills">
+        <button class="textbtn" id="copyBtn">Copy list as text</button>
+        <button class="textbtn" id="resetBtn" hidden>Reset to the original list</button>
+        <button class="textbtn" id="demoBtn" hidden>Try the share-sheet screen</button>
+        <button class="textbtn" id="connectBtn">Connect to GitHub</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="list" aria-live="off"></main>
+
+<footer>
+  <div class="status" id="status" role="status"></div>
+</footer>
+</div>
+
+<div class="toast" id="toast" role="status" hidden><span id="toastText"></span><button id="toastBtn" hidden>Undo</button></div>
+
+<div class="backdrop" id="backdrop" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheethead">
+      <div>
+        <h2 id="sheetTitle"></h2>
+        <div class="quiet" id="sheetMeta" style="margin-top:4px;font-size:14px"></div>
+      </div>
+      <button class="round" id="closeBtn" aria-label="Close">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="tags" id="sheetTags"></div>
+    <dl class="facts" id="sheetFacts"></dl>
+    <div class="actions">
+      <button class="primary" id="seenBtn"></button>
+      <button class="secondary" id="loveBtn" aria-pressed="false">We loved it</button>
+    </div>
+    <div class="actions">
+      <button class="secondary" id="editBtn" aria-expanded="false" aria-controls="editBox">Edit</button>
+      <button class="secondary danger" id="removeBtn">Remove</button>
+    </div>
+    <div class="edit" id="editBox" hidden>
+      <div class="field"><label for="editTitle">Title</label><input id="editTitle" type="text"></div>
+      <div class="field"><label for="editNote">Note</label><input id="editNote" type="text" placeholder="Platform, who tipped it, anything"></div>
+      <div class="field"><label for="editTags">Labels, separated by spaces</label><input id="editTags" type="text" placeholder="cosy thriller"></div>
+      <div class="group"><div class="label">Type</div><div class="pills" id="editTypes">
+        <button class="pill" data-v="movie">Movie</button><button class="pill" data-v="series">Series</button><button class="pill" data-v="podcast">Podcast</button>
+      </div></div>
+      <button class="primary" id="saveEdit" style="flex:none">Save changes</button>
+    </div>
+  </div>
+</div>
+
+<div class="backdrop top" id="addBackdrop" hidden>
+  <form class="sheet" id="addForm" role="dialog" aria-modal="true" aria-labelledby="addHeading" autocomplete="off">
+    <div class="sheethead">
+      <h2 id="addHeading">Add to the list</h2>
+      <button class="round" type="button" id="addClose" aria-label="Close">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="field"><label for="addInput">Title</label><input id="addInput" type="text" placeholder="Film, series or podcast" enterkeyhint="done"></div>
+    <div class="group"><div class="label">Type, guessed for you</div><div class="pills" id="addTypes">
+      <button class="pill" type="button" data-v="movie">Movie</button><button class="pill" type="button" data-v="series">Series</button><button class="pill" type="button" data-v="podcast">Podcast</button>
+    </div></div>
+    <div class="field"><label for="addNote">Note, optional</label><input id="addNote" type="text" placeholder="Platform, who tipped it, anything"></div>
+    <div class="field"><label for="addTags">Labels, optional</label><input id="addTags" type="text" placeholder="cosy thriller"></div>
+    <button class="primary" type="submit" style="flex:none">Add</button>
+  </form>
+</div>
+
+<div class="backdrop" id="inboxBackdrop" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="inboxHeading">
+    <div class="sheethead">
+      <div>
+        <h2 id="inboxHeading">From the share sheet</h2>
+        <div class="quiet" id="inboxMeta" style="margin-top:4px"></div>
+      </div>
+      <button class="round" id="inboxClose" aria-label="Close">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="cands" id="inboxList"></div>
+    <div class="group"><div class="label">Type for these</div><div class="pills" id="inboxTypes">
+      <button class="pill" data-v="movie">Movie</button><button class="pill" data-v="series">Series</button><button class="pill" data-v="podcast">Podcast</button>
+    </div></div>
+    <div class="field"><label for="inboxTags">Labels for these, optional</label><input id="inboxTags" type="text" placeholder="cosy thriller"></div>
+    <div class="actions">
+      <button class="primary" id="inboxAdd">Add</button>
+      <button class="secondary danger" id="inboxDiscard">Discard</button>
+    </div>
+  </div>
+</div>
+
+<div class="backdrop" id="ghBackdrop" hidden>
+  <form class="sheet" id="ghForm" role="dialog" aria-modal="true" aria-labelledby="ghHeading" autocomplete="off">
+    <div class="sheethead">
+      <div>
+        <h2 id="ghHeading">Connect to GitHub</h2>
+        <div class="quiet" style="margin-top:4px">The list is then read from and saved to your repository. The token is kept on this phone only.</div>
+      </div>
+      <button class="round" type="button" id="ghClose" aria-label="Close">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="field"><label for="ghRepo">Repository, as username/name</label><input id="ghRepo" type="text" placeholder="username/watchlist" autocapitalize="off" autocorrect="off" spellcheck="false"></div>
+    <div class="field"><label for="ghPath">List file</label><input id="ghPath" type="text" value="watchlist.md" autocapitalize="off" autocorrect="off" spellcheck="false"></div>
+    <div class="field"><label for="ghToken">Access token</label><input id="ghToken" type="password" placeholder="github_pat_..." autocapitalize="off" autocorrect="off" spellcheck="false"></div>
+    <div class="msg" id="ghMsg" role="status"></div>
+    <div class="actions">
+      <button class="primary" type="submit" id="ghConnect">Connect</button>
+      <button class="secondary danger" type="button" id="ghDisconnect" hidden>Disconnect</button>
+    </div>
+  </form>
+</div>
+
+<script src="core.js"></script>
+<script>
+(function () {
+  'use strict';
+  var C = window.WatchCore;
+  var $ = function (id) { return document.getElementById(id); };
+  var TYPE_LABEL = { movie: 'Movies', series: 'Series', podcast: 'Podcasts' };
+  var TYPE_ONE = { movie: 'Movie', series: 'Series', podcast: 'Podcast' };
+  var SHOW_LABEL = { unseen: 'Not seen', seen: 'Seen', loved: 'We loved', all: 'Everything' };
+  var CHECK = '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  var INFO = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 11v7"/><path d="M12 6v0.2"/></svg>';
+  var BALLOON = '<svg class="love" role="img" aria-label="We loved it" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="9" rx="6" ry="7"/><path d="M12 16v1.5c-2 2 2 2.5 0 4.5"/></svg>';
+
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } },
+    del: function (k) { try { localStorage.removeItem(k); } catch (e) {} }
+  };
+
+  var state = { head: '', items: [], view: { show: 'unseen', type: 'all', sort: 'added', group: true }, open: null, addType: null };
+  try { var v = JSON.parse(store.get('watchlist-view') || 'null'); if (v) Object.assign(state.view, v); } catch (e) {}
+
+  /* ---------- storage: this phone (preview) or a GitHub file ---------- */
+  var gh = null;
+  try { gh = JSON.parse(store.get('watchlist-github') || 'null'); } catch (e) {}
+  var remoteSha = null, pending = [], saving = false, original = '';
+
+  function setStatus(text, bad) { var s = $('status'); s.textContent = text || ''; s.classList.toggle('bad', !!bad); }
+
+  function ghApi(path, cfg) { cfg = cfg || gh; return 'https://api.github.com/repos/' + cfg.owner + '/' + cfg.repo + '/contents/' + path.split('/').map(encodeURIComponent).join('/'); }
+  function ghHeaders(cfg) { cfg = cfg || gh; var h = { 'Accept': 'application/vnd.github+json' }; if (cfg.token) h['Authorization'] = 'Bearer ' + cfg.token; return h; }
+  function ghFail(r) { var e = new Error('GitHub answered ' + r.status); e.status = r.status; return e; }
+  function ghRead(path, cfg) {
+    return fetch(ghApi(path, cfg), { headers: ghHeaders(cfg), cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw ghFail(r); return r.json(); })
+      .then(function (j) { return { sha: j.sha, text: C.fromBase64(j.content || '') }; });
+  }
+  function ghLoad(cfg) { return ghRead((cfg || gh).path, cfg).then(function (f) { if (!cfg) remoteSha = f.sha; return f.text; }); }
+  function ghSave(text) {
+    return fetch(ghApi(gh.path), { method: 'PUT', headers: ghHeaders(), body: JSON.stringify({ message: 'Update watchlist', content: C.toBase64(text), sha: remoteSha }) })
+      .then(function (r) {
+        if (r.status === 409 || r.status === 422) { var e = new Error('conflict'); e.conflict = true; throw e; }
+        if (!r.ok) throw ghFail(r);
+        return r.json();
+      }).then(function (j) { remoteSha = j.content.sha; });
+  }
+  function ghInboxList() {
+    return fetch(ghApi('inbox'), { headers: ghHeaders(), cache: 'no-store' })
+      .then(function (r) { if (r.status === 404) return []; if (!r.ok) throw ghFail(r); return r.json(); })
+      .then(function (a) { return Array.isArray(a) ? a.filter(function (f) { return f.type === 'file'; }) : []; });
+  }
+  function ghDelete(file) {
+    return fetch(ghApi(file.path), { method: 'DELETE', headers: ghHeaders(), body: JSON.stringify({ message: 'Clear watchlist inbox', sha: file.sha }) })
+      .then(function (r) { if (!r.ok && r.status !== 404) throw ghFail(r); });
+  }
+  function whenIdle(cb) { if (!saving && !pending.length) cb(); else setTimeout(function () { whenIdle(cb); }, 400); }
+
+  function load() {
+    if (gh) {
+      return ghLoad().then(function (text) { original = text; return text; });
+    }
+    return fetch('watchlist.md', { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error('The list file did not load (' + r.status + ')'); return r.text(); })
+      .then(function (text) { original = text; var local = store.get('watchlist-md'); return local || text; });
+  }
+
+  function persist() {
+    var text = C.serialize(state.head, state.items);
+    if (!gh) {
+      var ok = store.set('watchlist-md', text);
+      pending = [];
+      setStatus(ok ? 'Draft: changes are saved on this phone only' : 'Draft: this browser will not keep changes after you close the page', !ok);
+      return;
+    }
+    if (saving) return;
+    saving = true; setStatus('Saving');
+    var sent = pending.length;
+    ghSave(text).then(function () {
+      pending.splice(0, sent); saving = false; setStatus('Saved');
+      if (pending.length) persist();
+    }).catch(function (err) {
+      saving = false;
+      if (err.conflict) {
+        ghLoad().then(function (remote) {
+          var parsed = C.parse(remote);
+          pending.forEach(function (op) { C.apply(parsed.items, op); });
+          state.head = parsed.head; state.items = parsed.items; render(); persist();
+        }).catch(function (e2) { setStatus('Could not save: ' + e2.message + '. Your change is still on screen; change anything to try again.', true); });
+      } else {
+        setStatus('Could not save: ' + err.message + '. Your change is still on screen; change anything to try again.', true);
+      }
+    });
+  }
+
+  function commit(op) {
+    var res = C.apply(state.items, op);
+    pending.push(op);
+    render();
+    persist();
+    return res;
+  }
+
+  /* ---------- rendering ---------- */
+  function visible() {
+    var v = state.view;
+    var list = state.items.map(function (it, i) { return { it: it, i: i }; }).filter(function (x) {
+      var it = x.it;
+      if (v.type !== 'all' && it.type !== v.type) return false;
+      if (v.show === 'unseen') return !it.seen;
+      if (v.show === 'seen') return it.seen;
+      if (v.show === 'loved') return it.loved;
+      return true;
+    });
+    if (v.sort === 'az') list.sort(function (a, b) { return a.it.title.localeCompare(b.it.title, undefined, { sensitivity: 'base' }); });
+    else list.sort(function (a, b) { return b.i - a.i; });
+    return list.map(function (x) { return x.it; });
+  }
+
+  function rowEl(it) {
+    var li = document.createElement('li');
+    li.className = 'row' + (it.seen ? ' seen' : '');
+    var tick = document.createElement('button');
+    tick.className = 'tick'; tick.setAttribute('role', 'checkbox'); tick.setAttribute('aria-checked', it.seen ? 'true' : 'false');
+    tick.setAttribute('aria-label', (it.type === 'podcast' ? 'Heard ' : 'Seen ') + it.title);
+    tick.innerHTML = '<span>' + CHECK + '</span>';
+    tick.addEventListener('click', function () { toggleSeen(it); });
+    var main = document.createElement('button');
+    main.className = 'title';
+    var name = document.createElement('span'); name.className = 'name'; name.textContent = it.title; main.appendChild(name);
+    if (it.loved) main.insertAdjacentHTML('beforeend', BALLOON);
+    if (it.note) { var n = document.createElement('span'); n.className = 'note'; n.textContent = it.note.length > 44 ? it.note.slice(0, 42).trim() + '…' : it.note; main.appendChild(n); }
+    main.addEventListener('click', function () { openSheet(it); });
+    var info = document.createElement('button');
+    info.className = 'info'; info.setAttribute('aria-label', 'More about ' + it.title);
+    info.innerHTML = '<span>' + INFO + '</span>';
+    info.addEventListener('click', function () { openSheet(it); });
+    li.appendChild(tick); li.appendChild(main); li.appendChild(info);
+    return li;
+  }
+
+  function render() {
+    var v = state.view, list = visible(), root = $('list');
+    root.textContent = '';
+    var typeText = v.type === 'all' ? '' : ' · ' + TYPE_LABEL[v.type];
+    $('summary').textContent = SHOW_LABEL[v.show] + typeText + ' · ' + list.length + (v.sort === 'az' ? ' · A to Z' : ' · newest first');
+    if (!list.length) {
+      var p = document.createElement('p'); p.className = 'empty';
+      p.textContent = state.items.length ? 'Nothing here with these filters. Open the filter button to change them.' : 'The list is empty. Tap the yellow plus to add a first title.';
+      root.appendChild(p);
+    } else if (v.group) {
+      ['movie', 'series', 'podcast'].forEach(function (t) {
+        var part = list.filter(function (it) { return it.type === t; });
+        if (!part.length) return;
+        var h = document.createElement('h2'); h.className = 'type'; h.textContent = TYPE_LABEL[t] + ' · ' + part.length; root.appendChild(h);
+        var ul = document.createElement('ul'); part.forEach(function (it) { ul.appendChild(rowEl(it)); }); root.appendChild(ul);
+      });
+    } else {
+      var ul = document.createElement('ul'); list.forEach(function (it) { ul.appendChild(rowEl(it)); }); root.appendChild(ul);
+    }
+    document.querySelectorAll('#panel .pills[data-key]').forEach(function (g) {
+      g.querySelectorAll('.pill').forEach(function (b) { b.setAttribute('aria-pressed', String(v[g.dataset.key] === b.dataset.v)); });
+    });
+    $('groupToggle').checked = !!v.group;
+    if (state.open) fillSheet();
+  }
+
+  /* ---------- toast ---------- */
+  var toastTimer = null, toastAction = null;
+  function toast(text, undo) {
+    $('toastText').textContent = text; toastAction = undo || null;
+    $('toastBtn').hidden = !undo; $('toast').hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { $('toast').hidden = true; }, undo ? 6000 : 2600);
+  }
+  $('toastBtn').addEventListener('click', function () { if (toastAction) toastAction(); $('toast').hidden = true; });
+
+  /* ---------- actions ---------- */
+  function toggleSeen(it) {
+    var key = C.key(it.title), was = it.seen;
+    commit({ kind: 'patch', key: key, patch: { seen: !was } });
+    toast(was ? 'Back on the to-watch list' : 'Marked as seen', function () { commit({ kind: 'patch', key: key, patch: { seen: was } }); });
+  }
+
+  /* ---------- info sheet ---------- */
+  var removeArmed = false, editType = 'movie';
+  function fact(dl, k, v, cls, href) {
+    var row = document.createElement('div'); row.className = 'fact';
+    var dt = document.createElement('dt'); dt.textContent = k;
+    var dd = document.createElement('dd'); if (cls) dd.className = cls;
+    if (href) { var a = document.createElement('a'); a.href = href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = v; dd.appendChild(a); } else dd.textContent = v;
+    row.appendChild(dt); row.appendChild(dd); dl.appendChild(row);
+  }
+  function fillSheet() {
+    var it = state.open; if (!it) return;
+    $('sheetTitle').textContent = it.title;
+    $('sheetMeta').textContent = TYPE_ONE[it.type] + (it.seen ? ' · seen' : ' · not seen yet') + (it.loved ? ' · we loved it' : '');
+    var tags = $('sheetTags'); tags.textContent = '';
+    it.tags.forEach(function (t) { var s = document.createElement('span'); s.className = 'tag'; s.textContent = t; tags.appendChild(s); });
+    var dl = $('sheetFacts'); dl.textContent = '';
+    if (it.note) fact(dl, 'Note', it.note);
+    fact(dl, 'Added', it.added ? C.prettyDate(it.added) : 'From the original note');
+    fact(dl, 'IMDb', 'Filled in later', 'later');
+    fact(dl, 'Where to watch', 'Filled in later', 'later');
+    if (it.url) { var host = ''; try { host = new URL(it.url).hostname.replace(/^www\./, ''); } catch (e) { host = 'Open link'; } fact(dl, 'Link', host, '', it.url); }
+    $('seenBtn').textContent = it.seen ? 'Mark as not seen' : 'Mark as seen';
+    $('loveBtn').setAttribute('aria-pressed', String(!!it.loved));
+    $('removeBtn').textContent = removeArmed ? 'Tap again to remove' : 'Remove';
+  }
+  function openSheet(it) {
+    state.open = it; removeArmed = false;
+    $('editBox').hidden = true; $('editBtn').setAttribute('aria-expanded', 'false');
+    fillSheet(); $('backdrop').hidden = false; $('closeBtn').focus();
+  }
+  function closeSheet() { state.open = null; $('backdrop').hidden = true; }
+  $('closeBtn').addEventListener('click', closeSheet);
+  $('backdrop').addEventListener('click', function (e) { if (e.target === $('backdrop')) closeSheet(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && state.open) closeSheet(); });
+  function reopen(key) { state.open = state.items.find(function (x) { return C.key(x.title) === key; }) || null; if (state.open) fillSheet(); else closeSheet(); }
+  $('seenBtn').addEventListener('click', function () { var it = state.open, key = C.key(it.title); commit({ kind: 'patch', key: key, patch: { seen: !it.seen } }); reopen(key); });
+  $('loveBtn').addEventListener('click', function () {
+    var it = state.open, key = C.key(it.title), on = !it.loved;
+    commit({ kind: 'patch', key: key, patch: on ? { loved: true, seen: true } : { loved: false } }); reopen(key);
+  });
+  $('removeBtn').addEventListener('click', function () {
+    if (!removeArmed) { removeArmed = true; fillSheet(); return; }
+    var it = state.open, copy = Object.assign({}, it, { tags: it.tags.slice() }), at = state.items.indexOf(it);
+    closeSheet(); commit({ kind: 'remove', key: C.key(it.title) });
+    toast('Removed ' + copy.title, function () { commit({ kind: 'add', item: copy, at: at }); });
+  });
+  $('editBtn').addEventListener('click', function () {
+    var box = $('editBox'), it = state.open, show = box.hidden;
+    box.hidden = !show; $('editBtn').setAttribute('aria-expanded', String(show));
+    if (show) { $('editTitle').value = it.title; $('editNote').value = it.note; $('editTags').value = it.tags.join(' '); editType = it.type; paintEditTypes(); $('editTitle').focus(); }
+  });
+  function paintEditTypes() { $('editTypes').querySelectorAll('.pill').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.v === editType)); }); }
+  $('editTypes').addEventListener('click', function (e) { var b = e.target.closest('.pill'); if (!b) return; editType = b.dataset.v; paintEditTypes(); });
+  $('saveEdit').addEventListener('click', function () {
+    var it = state.open, key = C.key(it.title), title = C.tidy($('editTitle').value);
+    if (!title) { toast('A title cannot be empty'); return; }
+    var newKey = C.key(title);
+    if (newKey !== key && state.items.some(function (x) { return C.key(x.title) === newKey; })) { toast('Another entry already has that title'); return; }
+    var tags = $('editTags').value.toLowerCase().split(/[\s,#]+/).filter(Boolean);
+    commit({ kind: 'patch', key: key, patch: { title: title, note: C.tidyNote($('editNote').value), tags: tags, type: editType } });
+    $('editBox').hidden = true; $('editBtn').setAttribute('aria-expanded', 'false'); reopen(newKey); toast('Saved');
+  });
+
+  /* ---------- filter panel ---------- */
+  function saveView() { store.set('watchlist-view', JSON.stringify(state.view)); }
+  $('filterBtn').addEventListener('click', function () {
+    var open = $('panel').hidden; $('panel').hidden = !open; $('filterBtn').setAttribute('aria-expanded', String(open));
+  });
+  $('panel').addEventListener('click', function (e) {
+    var b = e.target.closest('.pill'); if (!b) return;
+    var g = b.closest('.pills[data-key]'); if (!g) return;
+    var k = g.dataset.key, off = { show: 'all', type: 'all', sort: 'added' };
+    state.view[k] = state.view[k] === b.dataset.v ? off[k] : b.dataset.v; saveView(); render();
+  });
+  $('groupToggle').addEventListener('change', function (e) { state.view.group = e.target.checked; saveView(); render(); });
+  $('copyBtn').addEventListener('click', function () {
+    var text = C.serialize(state.head, state.items);
+    try { navigator.clipboard.writeText(text).then(function () { toast('The whole list is copied'); }, function () { toast('Copying is not allowed here'); }); }
+    catch (e) { toast('Copying is not allowed here'); }
+  });
+  $('resetBtn').addEventListener('click', function () {
+    store.del('watchlist-md'); var p = C.parse(original); state.head = p.head; state.items = p.items; pending = []; render();
+    setStatus('Draft: back to the original list'); toast('Back to the original list');
+  });
+
+  /* ---------- adding ---------- */
+  function paintAddTypes() {
+    var t = state.addType || C.guessType($('addInput').value + ' ' + $('addNote').value);
+    $('addTypes').querySelectorAll('.pill').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.v === t)); });
+  }
+  function openAdd() {
+    $('addInput').value = ''; $('addNote').value = ''; $('addTags').value = ''; state.addType = null; paintAddTypes();
+    $('addBackdrop').hidden = false; $('addInput').focus();
+  }
+  function closeAdd() { $('addBackdrop').hidden = true; }
+  $('addBtn').addEventListener('click', openAdd);
+  $('addClose').addEventListener('click', closeAdd);
+  $('addBackdrop').addEventListener('click', function (e) { if (e.target === $('addBackdrop')) closeAdd(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !$('addBackdrop').hidden) closeAdd(); });
+  $('addInput').addEventListener('input', paintAddTypes);
+  $('addNote').addEventListener('input', paintAddTypes);
+  $('addTypes').addEventListener('click', function (e) {
+    var b = e.target.closest('.pill'); if (!b) return;
+    state.addType = state.addType === b.dataset.v ? null : b.dataset.v; paintAddTypes();
+  });
+  $('addForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var raw = $('addInput').value, note = $('addNote').value;
+    var item = C.fromInput(raw, state.addType || C.guessType(raw + ' ' + note), C.today());
+    if (!item) { toast('Type a title first'); $('addInput').focus(); return; }
+    if (C.tidy(note)) item.note = C.tidyNote([item.note, note].filter(Boolean).join(', '));
+    $('addTags').value.toLowerCase().split(/[\s,#]+/).filter(Boolean).forEach(function (g) { if (item.tags.indexOf(g) === -1) item.tags.push(g); });
+    var key = C.key(item.title);
+    var existing = state.items.find(function (x) { return C.key(x.title) === key; });
+    if (existing) { toast('Already on the list' + (existing.seen ? ', marked as seen' : '')); return; }
+    commit({ kind: 'add', item: item });
+    closeAdd();
+    toast('Added to ' + TYPE_LABEL[item.type], function () { commit({ kind: 'remove', key: key }); });
+  });
+
+  /* ---------- share-sheet inbox ---------- */
+  var inbox = { files: [], cands: [], type: null, armed: false };
+  var SAMPLE = '09:41\nFilm tips\n1. Paddington 2 (2017), dir. Paul King\n2. Local Hero (1983), dir. Bill Forsyth\n3. Chef (2014), dir. Jon Favreau\n4. Wadjda (2012), dir. Haifaa al-Mansour\n12 likes';
+  function onList(title) { var k = C.key(title); return state.items.some(function (x) { return C.key(x.title) === k; }); }
+  function setInbox(parts) {
+    var all = [], seen = {};
+    parts.forEach(function (p) { C.extract(p.text).forEach(function (c) { var k = C.key(c.title); if (seen[k]) return; seen[k] = true; c.on = c.sure && !onList(c.title); all.push(c); }); });
+    inbox.files = parts.map(function (p) { return p.file; }).filter(Boolean);
+    inbox.cands = all; inbox.type = null; inbox.armed = false;
+    inbox.guess = C.guessType(parts.map(function (p) { return p.text; }).join(' '));
+    var n = parts.length;
+    $('inboxBannerText').textContent = n === 1 ? '1 share is waiting' : n + ' shares are waiting';
+    $('inboxBanner').hidden = n === 0;
+  }
+  function checkInbox() {
+    if (!gh) return;
+    ghInboxList().then(function (files) {
+      if (!files.length) { $('inboxBanner').hidden = true; return; }
+      return Promise.all(files.map(function (f) { return ghRead(f.path).then(function (r) { return { file: { path: f.path, sha: r.sha }, text: r.text }; }); })).then(setInbox);
+    }).catch(function () {});
+  }
+  function candRow(box, c) {
+    var row = document.createElement('div'); row.className = 'cand';
+    var n = box.querySelectorAll('.cand').length + 1;
+    var cb = document.createElement('input'); cb.type = 'checkbox'; cb.id = 'cand' + n;
+    var tx = document.createElement('input'); tx.type = 'text'; tx.id = 'candTitle' + n;
+    if (c) { cb.checked = !!c.on; cb.setAttribute('aria-label', 'Add ' + c.title); tx.value = c.title; tx.setAttribute('aria-label', 'Title ' + n); }
+    else { cb.disabled = true; cb.setAttribute('aria-label', 'Add the other title'); tx.placeholder = 'Other title'; tx.setAttribute('aria-label', 'Other title'); }
+    cb.addEventListener('change', function () { if (c) { c.on = cb.checked; paintInboxCount(); } });
+    tx.addEventListener('input', function () {
+      if (!c) {
+        if (!tx.value.trim()) return;
+        c = { title: tx.value, note: '', url: '', sure: true, on: true };
+        inbox.cands.push(c); cb.disabled = false; cb.checked = true;
+        candRow(box, null);
+      } else c.title = tx.value;
+      paintInboxCount();
+    });
+    row.appendChild(cb); row.appendChild(tx);
+    if (c && onList(c.title)) { var s = document.createElement('small'); s.textContent = 'On the list'; row.appendChild(s); }
+    box.appendChild(row);
+  }
+  function paintInbox() {
+    var box = $('inboxList'); box.textContent = '';
+    if (!inbox.cands.length) { var p = document.createElement('p'); p.className = 'empty'; p.style.padding = '8px 0'; p.textContent = 'No titles found in what was shared. Type the title below.'; box.appendChild(p); }
+    inbox.cands.forEach(function (c) { candRow(box, c); });
+    candRow(box, null);
+    $('inboxMeta').textContent = inbox.cands.length + (inbox.cands.length === 1 ? ' suggestion' : ' suggestions') + '. Untick or correct what is wrong, or type another title at the bottom.';
+    var t = inbox.type || inbox.guess;
+    $('inboxTypes').querySelectorAll('.pill').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.v === t)); });
+    $('inboxDiscard').textContent = inbox.armed ? 'Tap again to discard' : 'Discard';
+    paintInboxCount();
+  }
+  function paintInboxCount() { var n = inbox.cands.filter(function (c) { return c.on && c.title.trim(); }).length; $('inboxAdd').textContent = n === 1 ? 'Add 1 title' : 'Add ' + n + ' titles'; }
+  function openInbox() { inbox.armed = false; $('inboxTags').value = ''; paintInbox(); $('inboxBackdrop').hidden = false; }
+  function closeInbox() { $('inboxBackdrop').hidden = true; }
+  function clearInbox() {
+    var files = inbox.files.slice();
+    inbox.files = []; inbox.cands = []; $('inboxBanner').hidden = true; closeInbox();
+    if (!gh || !files.length) return;
+    whenIdle(function () {
+      files.reduce(function (chain, f) { return chain.then(function () { return ghDelete(f); }); }, Promise.resolve())
+        .catch(function (e) { setStatus('The shared items could not be cleared: ' + e.message + '. They will show up again.', true); });
+    });
+  }
+  $('inboxBanner').addEventListener('click', openInbox);
+  $('inboxClose').addEventListener('click', closeInbox);
+  $('inboxBackdrop').addEventListener('click', function (e) { if (e.target === $('inboxBackdrop')) closeInbox(); });
+  $('inboxTypes').addEventListener('click', function (e) { var b = e.target.closest('.pill'); if (!b) return; inbox.type = inbox.type === b.dataset.v ? null : b.dataset.v; paintInbox(); });
+  $('inboxAdd').addEventListener('click', function () {
+    var type = inbox.type || inbox.guess, added = 0;
+    var tags = $('inboxTags').value.toLowerCase().split(/[\s,#]+/).filter(Boolean);
+    inbox.cands.forEach(function (c) {
+      if (!c.on) return;
+      var item = C.fromInput(c.title, type, C.today()); if (!item || onList(item.title)) return;
+      if (c.note) item.note = C.tidyNote([item.note, c.note].filter(Boolean).join(', '));
+      if (c.url) item.url = c.url;
+      tags.forEach(function (g) { if (item.tags.indexOf(g) === -1) item.tags.push(g); });
+      commit({ kind: 'add', item: item }); added++;
+    });
+    clearInbox();
+    toast(added === 1 ? 'Added 1 title' : 'Added ' + added + ' titles');
+  });
+  $('inboxDiscard').addEventListener('click', function () {
+    if (!inbox.armed) { inbox.armed = true; paintInbox(); return; }
+    clearInbox(); toast('Discarded');
+  });
+  $('demoBtn').addEventListener('click', function () { setInbox([{ file: null, text: SAMPLE }]); openInbox(); });
+
+  /* ---------- connect to GitHub ---------- */
+  function ghMsg(text, bad) { var m = $('ghMsg'); m.textContent = text || ''; m.classList.toggle('bad', !!bad); }
+  function openConnect() {
+    ghMsg('');
+    if (gh) { $('ghRepo').value = gh.owner + '/' + gh.repo; $('ghPath').value = gh.path; $('ghToken').value = gh.token || ''; }
+    else if (/\.github\.io$/.test(location.hostname) && !$('ghRepo').value) {
+      var owner = location.hostname.split('.')[0], repo = location.pathname.split('/').filter(Boolean)[0] || location.hostname;
+      $('ghRepo').value = owner + '/' + repo;
+    }
+    $('ghDisconnect').hidden = !gh;
+    $('ghBackdrop').hidden = false;
+  }
+  function closeConnect() { $('ghBackdrop').hidden = true; }
+  $('connectBtn').addEventListener('click', openConnect);
+  $('ghClose').addEventListener('click', closeConnect);
+  $('ghBackdrop').addEventListener('click', function (e) { if (e.target === $('ghBackdrop')) closeConnect(); });
+  $('ghForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var parts = C.tidy($('ghRepo').value).replace(/^https?:\/\/github\.com\//i, '').split('/').filter(Boolean);
+    var path = C.tidy($('ghPath').value).replace(/^\/+/, '') || 'watchlist.md', token = C.tidy($('ghToken').value);
+    if (parts.length < 2) { ghMsg('Write the repository as username/name, for example aksie/watchlist.', true); return; }
+    if (!token) { ghMsg('Paste the access token. Saving does not work without it.', true); return; }
+    var cfg = { owner: parts[0], repo: parts[1], path: path, token: token };
+    ghMsg('Checking');
+    ghLoad(cfg).then(function () {
+      if (!store.set('watchlist-github', JSON.stringify(cfg))) { ghMsg('This browser will not remember the connection. Turn off private browsing and try again.', true); return; }
+      gh = cfg; pending = []; closeConnect(); toast('Connected to GitHub'); boot();
+    }).catch(function (err) {
+      if (err.status === 401 || err.status === 403) ghMsg('GitHub did not accept the token. Check that it is complete and allows this repository.', true);
+      else if (err.status === 404) ghMsg('Nothing found there. Check the repository name and the file name, and that the token covers this repository.', true);
+      else if (err.status) ghMsg(err.message + '. Try again in a moment.', true);
+      else ghMsg('This page could not reach GitHub. That is expected in this draft; it works once the page is on GitHub Pages.', true);
+    });
+  });
+  $('ghDisconnect').addEventListener('click', function () { store.del('watchlist-github'); gh = null; remoteSha = null; pending = []; closeConnect(); toast('Disconnected'); boot(); });
+  document.addEventListener('keydown', function (e) { if (e.key !== 'Escape') return; if (!$('inboxBackdrop').hidden) closeInbox(); if (!$('ghBackdrop').hidden) closeConnect(); });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) checkInbox(); });
+
+  /* ---------- start ---------- */
+  function boot() {
+    $('storeNote').textContent = gh ? 'Saving to ' + gh.owner + '/' + gh.repo : 'Draft: changes stay on this phone. Nothing is sent anywhere yet.';
+    $('resetBtn').hidden = !!gh; $('demoBtn').hidden = !!gh;
+    $('connectBtn').textContent = gh ? 'GitHub connection' : 'Connect to GitHub';
+    $('inboxBanner').hidden = true;
+    load().then(function (text) {
+      var p = C.parse(text); state.head = p.head; state.items = p.items; render();
+      setStatus(gh ? '' : 'Draft: changes are saved on this phone only');
+      checkInbox();
+    }).catch(function (err) {
+      $('summary').textContent = 'The list could not be loaded';
+      $('list').textContent = '';
+      var p = document.createElement('p'); p.className = 'empty';
+      p.textContent = err.message + (gh ? '. Open the filter button and check the GitHub connection.' : '. Reload the page to try again.'); $('list').appendChild(p);
+    });
+  }
+  boot();
+})();
+</script>
+</body>
+</html>
