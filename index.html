@@ -190,6 +190,7 @@ dl { margin: 0; }
       <div class="field"><label for="editTitle">Title</label><input id="editTitle" type="text"></div>
       <div class="field"><label for="editNote">Note</label><input id="editNote" type="text" placeholder="Platform, who tipped it, anything"></div>
       <div class="field"><label for="editTags">Labels, separated by spaces</label><input id="editTags" type="text" placeholder="cosy thriller"></div>
+      <div class="field"><label for="editImdb">IMDb link, optional</label><input id="editImdb" type="text" placeholder="Paste the film's IMDb address" autocapitalize="off" autocorrect="off" spellcheck="false"></div>
       <div class="group"><div class="label">Type</div><div class="pills" id="editTypes">
         <button class="pill" data-v="movie">Movie</button><button class="pill" data-v="series">Series</button><button class="pill" data-v="podcast">Podcast</button>
       </div></div>
@@ -261,7 +262,7 @@ dl { margin: 0; }
   </form>
 </div>
 
-<script src="core.js"></script>
+<script src="core.js?v=2"></script>
 <script>
 (function () {
   'use strict';
@@ -461,7 +462,10 @@ dl { margin: 0; }
     var dl = $('sheetFacts'); dl.textContent = '';
     if (it.note) fact(dl, 'Note', it.note);
     fact(dl, 'Added', it.added ? C.prettyDate(it.added) : 'From the original note');
-    fact(dl, 'IMDb', 'Filled in later', 'later');
+    if (it.type !== 'podcast') {
+      if (it.imdb) fact(dl, 'IMDb', 'Open on IMDb', '', 'https://www.imdb.com/title/' + it.imdb + '/');
+      else fact(dl, 'IMDb', 'Search on IMDb', '', 'https://www.imdb.com/find/?q=' + encodeURIComponent(it.title));
+    }
     fact(dl, 'Where to watch', 'Filled in later', 'later');
     if (it.url) { var host = ''; try { host = new URL(it.url).hostname.replace(/^www\./, ''); } catch (e) { host = 'Open link'; } fact(dl, 'Link', host, '', it.url); }
     $('seenBtn').textContent = it.seen ? 'Mark as not seen' : 'Mark as seen';
@@ -492,7 +496,7 @@ dl { margin: 0; }
   $('editBtn').addEventListener('click', function () {
     var box = $('editBox'), it = state.open, show = box.hidden;
     box.hidden = !show; $('editBtn').setAttribute('aria-expanded', String(show));
-    if (show) { $('editTitle').value = it.title; $('editNote').value = it.note; $('editTags').value = it.tags.join(' '); editType = it.type; paintEditTypes(); $('editTitle').focus(); }
+    if (show) { $('editTitle').value = it.title; $('editNote').value = it.note; $('editTags').value = it.tags.join(' '); $('editImdb').value = it.imdb ? 'https://www.imdb.com/title/' + it.imdb + '/' : ''; editType = it.type; paintEditTypes(); $('editTitle').focus(); }
   });
   function paintEditTypes() { $('editTypes').querySelectorAll('.pill').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.v === editType)); }); }
   $('editTypes').addEventListener('click', function (e) { var b = e.target.closest('.pill'); if (!b) return; editType = b.dataset.v; paintEditTypes(); });
@@ -502,7 +506,7 @@ dl { margin: 0; }
     var newKey = C.key(title);
     if (newKey !== key && state.items.some(function (x) { return C.key(x.title) === newKey; })) { toast('Another entry already has that title'); return; }
     var tags = $('editTags').value.toLowerCase().split(/[\s,#]+/).filter(Boolean);
-    commit({ kind: 'patch', key: key, patch: { title: title, note: C.tidyNote($('editNote').value), tags: tags, type: editType } });
+    commit({ kind: 'patch', key: key, patch: { title: title, note: C.tidyNote($('editNote').value), tags: tags, type: editType, imdb: C.imdbId($('editImdb').value) } });
     $('editBox').hidden = true; $('editBtn').setAttribute('aria-expanded', 'false'); reopen(newKey); toast('Saved');
   });
 
@@ -639,7 +643,7 @@ dl { margin: 0; }
       if (!c.on) return;
       var item = C.fromInput(c.title, type, C.today()); if (!item || onList(item.title)) return;
       if (c.note) item.note = C.tidyNote([item.note, c.note].filter(Boolean).join(', '));
-      if (c.url) item.url = c.url;
+      if (c.url) { if (/imdb\.com/i.test(c.url) && C.imdbId(c.url)) item.imdb = C.imdbId(c.url); else item.url = c.url; }
       tags.forEach(function (g) { if (item.tags.indexOf(g) === -1) item.tags.push(g); });
       commit({ kind: 'add', item: item }); added++;
     });

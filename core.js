@@ -15,7 +15,8 @@
       if (!m) { if (!started) head.push(raw); return; }
       started = true;
       var rest = ' ' + m[2];
-      var it = { seen: m[1] !== ' ', loved: false, title: '', note: '', type: 'movie', tags: [], added: '', url: '' };
+      var it = { seen: m[1] !== ' ', loved: false, title: '', note: '', type: 'movie', tags: [], added: '', url: '', imdb: '' };
+      rest = rest.replace(/\simdb:(tt\d{5,10})(?=\s|$)/i, function (_, id) { it.imdb = id.toLowerCase(); return ''; });
       if (rest.indexOf(BALLOON) !== -1) { it.loved = true; rest = rest.replace(BALLOON, ' '); }
       rest = rest.replace(/\s(https?:\/\/\S+)\s*$/, function (_, u) { it.url = u; return ''; });
       rest = rest.replace(/\s\+(\d{4}-\d{2}-\d{2})(?=\s|$)/, function (_, d) { it.added = d; return ''; });
@@ -39,10 +40,14 @@
     s += ' #' + it.type;
     (it.tags || []).forEach(function (t) { s += ' #' + t; });
     if (it.added) s += ' +' + it.added;
+    if (it.imdb) s += ' imdb:' + it.imdb;
     if (it.url) s += ' ' + it.url;
     return s;
   }
   function serialize(head, items) { return (head ? head + '\n\n' : '') + items.map(line).join('\n') + '\n'; }
+
+  /* An IMDb id (tt1234567) picked out of an id or a pasted IMDb link. */
+  function imdbId(text) { var m = /tt\d{5,10}/i.exec(String(text || '')); return m ? m[0].toLowerCase() : ''; }
 
   function guessType(text) {
     var t = String(text || '').toLowerCase();
@@ -62,7 +67,9 @@
     title = tidy(title).replace(/[\s,;:-]+$/, '');
     if (!title) return null;
     title = title.charAt(0).toUpperCase() + title.slice(1);
-    return { seen: false, loved: false, title: title, note: tidyNote(note), type: TYPES.indexOf(type) !== -1 ? type : 'movie', tags: tags, added: today || '', url: url };
+    var imdb = '';
+    if (/imdb\.com/i.test(url) && imdbId(url)) { imdb = imdbId(url); url = ''; }
+    return { seen: false, loved: false, title: title, note: tidyNote(note), type: TYPES.indexOf(type) !== -1 ? type : 'movie', tags: tags, added: today || '', url: url, imdb: imdb };
   }
 
   /* One change, described so it can be replayed on a fresher copy of the list. */
@@ -131,6 +138,6 @@
     return out;
   }
 
-  var api = { extract: extract, parse: parse, serialize: serialize, line: line, key: key, tidy: tidy, tidyNote: tidyNote, guessType: guessType, fromInput: fromInput, apply: apply, today: today, prettyDate: prettyDate, toBase64: toBase64, fromBase64: fromBase64 };
+  var api = { imdbId: imdbId, extract: extract, parse: parse, serialize: serialize, line: line, key: key, tidy: tidy, tidyNote: tidyNote, guessType: guessType, fromInput: fromInput, apply: apply, today: today, prettyDate: prettyDate, toBase64: toBase64, fromBase64: fromBase64 };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.WatchCore = api;
 })(typeof window !== 'undefined' ? window : this);
