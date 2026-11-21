@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#000000"/>
+  <g fill="none" stroke="#F4F1EA" stroke-width="15" stroke-linecap="round" stroke-linejoin="round">
+    <!-- antenna -->
+    <path d="M250 152 L186 74"/>
+    <path d="M262 152 L330 70"/>
+    <!-- set -->
+    <path d="M112 156 C96 157 86 168 86 184 L84 372 C84 390 95 401 112 402 L402 404 C418 404 428 392 428 376 L430 186 C430 168 419 157 402 157 Z"/>
+    <!-- screen -->
+    <path d="M140 190 C128 190 121 198 121 210 L120 348 C120 360 128 368 140 368 L306 369 C318 369 325 361 325 349 L326 211 C326 199 318 191 306 191 Z"/>
+    <!-- knobs -->
+    <circle cx="378" cy="228" r="19"/>
+    <circle cx="378" cy="292" r="19"/>
+    <!-- speaker -->
+    <path d="M358 340 L398 340"/>
+    <path d="M358 364 L398 364"/>
+    <!-- checkbox -->
+    <path d="M180 240 L258 238 L260 318 L182 320 Z" stroke-width="12"/>
+  </g>
+  <!-- tick -->
+  <path d="M196 276 L220 302 L282 222" fill="none" stroke="#F2B84B" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="186" cy="74" r="9" fill="#F4F1EA"/>
+  <circle cx="330" cy="70" r="9" fill="#F4F1EA"/>
+</svg>
