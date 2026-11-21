@@ -15,6 +15,18 @@ A shared list of films, series and podcasts to watch, with a small page to tick 
 `[ ]` is not seen, `[x]` is seen, a balloon after the box means we loved it.
 `#movie`, `#series` or `#podcast` sets the type; any other `#word` is a label.
 
+## To do
+
+Nightly job (not built yet). One scheduled run that looks things up and writes
+the results to a separate file, so it never clashes with edits to the list:
+
+- IMDb rating and IMDb link for every film and series. Needs a free OMDb key
+  stored as a repository secret, plus a small corrections file for titles that
+  match the wrong film.
+- Where to watch in the Netherlands, per film and series.
+- Spotify and Podimo links for every podcast. Until then the page falls back
+  to a search link when no direct link is stored.
+
 ## Licence
 
 The code of the page (`index.html` and `core.js`) is free software under the

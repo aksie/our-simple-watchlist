@@ -3,14 +3,14 @@
 Eén regel per titel, nieuwste onderaan. [ ] = nog niet gezien, [x] = gezien, 🎈 = geweldig.
 Tussen haakjes staat een notitie. #movie, #series of #podcast is het soort; andere #woorden zijn labels.
 
-- [ ] Niet van de wereld #podcast
-- [ ] Serge Simonart #podcast
+- [ ] Niet van de wereld #podcast https://open.spotify.com/show/5LjUOFU0WrNq5rgNswPKEH
+- [ ] Serge Simonart #podcast https://open.spotify.com/show/5LRhfZrnxmkufUeBNCCWKe
 - [ ] Electra #podcast
-- [ ] What went wrong #podcast
-- [ ] De kunst van het verdwijnen 2 #podcast
+- [ ] What went wrong #podcast https://open.spotify.com/show/15lonNfWzHLbMepKo0EDjs
+- [ ] De kunst van het verdwijnen 2 #podcast https://open.spotify.com/show/3SwkB1G1KrQdUv4UUWaLuH
 - [ ] A tiny plot #podcast
 - [ ] Podcast walk: Simone en de roofstaat #podcast
-- [ ] De vondeling #podcast
+- [ ] De vondeling #podcast https://open.spotify.com/show/02HbmZiEGXMRduAFcZMHlx
 - [ ] Natalie Haynes Stands Up for the Classics #podcast
 - [ ] Extraordinary Attorney Woo (januari 2023) #series https://www.netflix.com/nl/title/81518991
 - [ ] Ginny + Georgia (januari 2023) #series

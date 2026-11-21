@@ -15,10 +15,10 @@
       if (!m) { if (!started) head.push(raw); return; }
       started = true;
       var rest = ' ' + m[2];
-      var it = { seen: m[1] !== ' ', loved: false, title: '', note: '', type: 'movie', tags: [], added: '', url: '', imdb: '' };
+      var it = { seen: m[1] !== ' ', loved: false, title: '', note: '', type: 'movie', tags: [], added: '', links: [], imdb: '' };
       rest = rest.replace(/\simdb:(tt\d{5,10})(?=\s|$)/i, function (_, id) { it.imdb = id.toLowerCase(); return ''; });
       if (rest.indexOf(BALLOON) !== -1) { it.loved = true; rest = rest.replace(BALLOON, ' '); }
-      rest = rest.replace(/\s(https?:\/\/\S+)\s*$/, function (_, u) { it.url = u; return ''; });
+      rest = rest.replace(/\s(https?:\/\/\S+)/g, function (_, u) { if (it.links.indexOf(u) === -1) it.links.push(u); return ''; });
       rest = rest.replace(/\s\+(\d{4}-\d{2}-\d{2})(?=\s|$)/, function (_, d) { it.added = d; return ''; });
       rest = rest.replace(/\s#([\p{L}\p{N}_-]+)(?=\s|$)/gu, function (_, t) {
         var l = t.toLowerCase();
@@ -41,7 +41,7 @@
     (it.tags || []).forEach(function (t) { s += ' #' + t; });
     if (it.added) s += ' +' + it.added;
     if (it.imdb) s += ' imdb:' + it.imdb;
-    if (it.url) s += ' ' + it.url;
+    (it.links || []).forEach(function (u) { s += ' ' + u; });
     return s;
   }
   function serialize(head, items) { return (head ? head + '\n\n' : '') + items.map(line).join('\n') + '\n'; }
@@ -58,8 +58,8 @@
   }
 
   function fromInput(raw, type, today) {
-    var s = ' ' + tidy(raw), tags = [], url = '';
-    s = s.replace(/\s(https?:\/\/\S+)/, function (_, u) { url = u; return ''; });
+    var s = ' ' + tidy(raw), tags = [], links = [];
+    s = s.replace(/\s(https?:\/\/\S+)/g, function (_, u) { if (links.indexOf(u) === -1) links.push(u); return ''; });
     s = s.replace(/\s#([\p{L}\p{N}_-]+)/gu, function (_, t) { var l = t.toLowerCase(); if (TYPES.indexOf(l) !== -1) type = l; else if (tags.indexOf(l) === -1) tags.push(l); return ''; });
     s = tidy(s);
     var title = s, note = '', p = s.indexOf('(');
@@ -68,8 +68,8 @@
     if (!title) return null;
     title = title.charAt(0).toUpperCase() + title.slice(1);
     var imdb = '';
-    if (/imdb\.com/i.test(url) && imdbId(url)) { imdb = imdbId(url); url = ''; }
-    return { seen: false, loved: false, title: title, note: tidyNote(note), type: TYPES.indexOf(type) !== -1 ? type : 'movie', tags: tags, added: today || '', url: url, imdb: imdb };
+    links = links.filter(function (u) { if (!imdb && /imdb\.com/i.test(u) && imdbId(u)) { imdb = imdbId(u); return false; } return true; });
+    return { seen: false, loved: false, title: title, note: tidyNote(note), type: TYPES.indexOf(type) !== -1 ? type : 'movie', tags: tags, added: today || '', links: links, imdb: imdb };
   }
 
   /* One change, described so it can be replayed on a fresher copy of the list. */
@@ -77,14 +77,14 @@
     var i = -1, n;
     if (op.kind === 'add') {
       for (n = 0; n < items.length; n++) if (key(items[n].title) === key(op.item.title)) return false;
-      var copy = Object.assign({}, op.item, { tags: (op.item.tags || []).slice() });
+      var copy = Object.assign({}, op.item, { tags: (op.item.tags || []).slice(), links: (op.item.links || []).slice() });
       if (typeof op.at === 'number' && op.at >= 0 && op.at <= items.length) items.splice(op.at, 0, copy); else items.push(copy);
       return true;
     }
     for (n = 0; n < items.length; n++) if (key(items[n].title) === op.key) { i = n; break; }
     if (i === -1) return false;
     if (op.kind === 'remove') { items.splice(i, 1); return true; }
-    if (op.kind === 'patch') { Object.assign(items[i], op.patch); if (op.patch.tags) items[i].tags = op.patch.tags.slice(); return true; }
+    if (op.kind === 'patch') { Object.assign(items[i], op.patch); if (op.patch.tags) items[i].tags = op.patch.tags.slice(); if (op.patch.links) items[i].links = op.patch.links.slice(); return true; }
     return false;
   }
 

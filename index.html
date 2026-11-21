@@ -190,6 +190,7 @@ dl { margin: 0; }
       <div class="field"><label for="editTitle">Title</label><input id="editTitle" type="text"></div>
       <div class="field"><label for="editNote">Note</label><input id="editNote" type="text" placeholder="Platform, who tipped it, anything"></div>
       <div class="field"><label for="editTags">Labels, separated by spaces</label><input id="editTags" type="text" placeholder="cosy thriller"></div>
+      <div class="field"><label for="editLinks">Other links, separated by spaces</label><input id="editLinks" type="text" placeholder="Spotify, Podimo or any other address" autocapitalize="off" autocorrect="off" spellcheck="false"></div>
       <div class="field"><label for="editImdb">IMDb link, optional</label><input id="editImdb" type="text" placeholder="Paste the film's IMDb address" autocapitalize="off" autocorrect="off" spellcheck="false"></div>
       <div class="group"><div class="label">Type</div><div class="pills" id="editTypes">
         <button class="pill" data-v="movie">Movie</button><button class="pill" data-v="series">Series</button><button class="pill" data-v="podcast">Podcast</button>
@@ -262,7 +263,7 @@ dl { margin: 0; }
   </form>
 </div>
 
-<script src="core.js?v=2"></script>
+<script src="core.js?v=3"></script>
 <script>
 (function () {
   'use strict';
@@ -467,7 +468,14 @@ dl { margin: 0; }
       else fact(dl, 'IMDb', 'Search on IMDb', '', 'https://www.imdb.com/find/?q=' + encodeURIComponent(it.title));
     }
     fact(dl, 'Where to watch', 'Filled in later', 'later');
-    if (it.url) { var host = ''; try { host = new URL(it.url).hostname.replace(/^www\./, ''); } catch (e) { host = 'Open link'; } fact(dl, 'Link', host, '', it.url); }
+    var links = (it.links || []).slice();
+    function take(re) { for (var n = 0; n < links.length; n++) if (re.test(links[n])) return links.splice(n, 1)[0]; return ''; }
+    if (it.type === 'podcast') {
+      var sp = take(/spotify\.com/i), pd = take(/podimo\.com/i), q = encodeURIComponent(it.title);
+      fact(dl, 'Spotify', sp ? 'Open in Spotify' : 'Search in Spotify', '', sp || 'https://open.spotify.com/search/' + q + '/shows');
+      fact(dl, 'Podimo', pd ? 'Open in Podimo' : 'Look it up on Podimo', '', pd || 'https://www.google.com/search?q=' + encodeURIComponent('podimo ' + it.title));
+    }
+    links.forEach(function (u) { var host = ''; try { host = new URL(u).hostname.replace(/^www\./, ''); } catch (e) { host = 'Open link'; } fact(dl, 'Link', host, '', u); });
     $('seenBtn').textContent = it.seen ? 'Mark as not seen' : 'Mark as seen';
     $('loveBtn').setAttribute('aria-pressed', String(!!it.loved));
     $('removeBtn').textContent = removeArmed ? 'Tap again to remove' : 'Remove';
@@ -489,14 +497,14 @@ dl { margin: 0; }
   });
   $('removeBtn').addEventListener('click', function () {
     if (!removeArmed) { removeArmed = true; fillSheet(); return; }
-    var it = state.open, copy = Object.assign({}, it, { tags: it.tags.slice() }), at = state.items.indexOf(it);
+    var it = state.open, copy = Object.assign({}, it, { tags: it.tags.slice(), links: (it.links || []).slice() }), at = state.items.indexOf(it);
     closeSheet(); commit({ kind: 'remove', key: C.key(it.title) });
     toast('Removed ' + copy.title, function () { commit({ kind: 'add', item: copy, at: at }); });
   });
   $('editBtn').addEventListener('click', function () {
     var box = $('editBox'), it = state.open, show = box.hidden;
     box.hidden = !show; $('editBtn').setAttribute('aria-expanded', String(show));
-    if (show) { $('editTitle').value = it.title; $('editNote').value = it.note; $('editTags').value = it.tags.join(' '); $('editImdb').value = it.imdb ? 'https://www.imdb.com/title/' + it.imdb + '/' : ''; editType = it.type; paintEditTypes(); $('editTitle').focus(); }
+    if (show) { $('editTitle').value = it.title; $('editNote').value = it.note; $('editTags').value = it.tags.join(' '); $('editLinks').value = (it.links || []).join(' '); $('editImdb').value = it.imdb ? 'https://www.imdb.com/title/' + it.imdb + '/' : ''; editType = it.type; paintEditTypes(); $('editTitle').focus(); }
   });
   function paintEditTypes() { $('editTypes').querySelectorAll('.pill').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.v === editType)); }); }
   $('editTypes').addEventListener('click', function (e) { var b = e.target.closest('.pill'); if (!b) return; editType = b.dataset.v; paintEditTypes(); });
@@ -506,7 +514,7 @@ dl { margin: 0; }
     var newKey = C.key(title);
     if (newKey !== key && state.items.some(function (x) { return C.key(x.title) === newKey; })) { toast('Another entry already has that title'); return; }
     var tags = $('editTags').value.toLowerCase().split(/[\s,#]+/).filter(Boolean);
-    commit({ kind: 'patch', key: key, patch: { title: title, note: C.tidyNote($('editNote').value), tags: tags, type: editType, imdb: C.imdbId($('editImdb').value) } });
+    commit({ kind: 'patch', key: key, patch: { title: title, note: C.tidyNote($('editNote').value), tags: tags, type: editType, imdb: C.imdbId($('editImdb').value), links: $('editLinks').value.split(/\s+/).filter(function (u) { return /^https?:\/\/\S+$/i.test(u); }) } });
     $('editBox').hidden = true; $('editBtn').setAttribute('aria-expanded', 'false'); reopen(newKey); toast('Saved');
   });
 
@@ -643,7 +651,7 @@ dl { margin: 0; }
       if (!c.on) return;
       var item = C.fromInput(c.title, type, C.today()); if (!item || onList(item.title)) return;
       if (c.note) item.note = C.tidyNote([item.note, c.note].filter(Boolean).join(', '));
-      if (c.url) { if (/imdb\.com/i.test(c.url) && C.imdbId(c.url)) item.imdb = C.imdbId(c.url); else item.url = c.url; }
+      if (c.url) { if (/imdb\.com/i.test(c.url) && C.imdbId(c.url)) item.imdb = C.imdbId(c.url); else if (item.links.indexOf(c.url) === -1) item.links.push(c.url); }
       tags.forEach(function (g) { if (item.tags.indexOf(g) === -1) item.tags.push(g); });
       commit({ kind: 'add', item: item }); added++;
     });
