@@ -449,3 +449,4 @@ Tussen haakjes staat een notitie. #movie, #series of #podcast is het soort; ande
 - [ ] Club kid (bios, 2026, Jordan Firstman) #movie #comedy #drama imdb:tt38058097
 - [ ] Tony (bios, Anthony Bourdain, 2026, Matt Johnson) #movie #biopic #drama imdb:tt33095251
 - [ ] Coherence (2013, James Ward Byrkit, IMDb 7.2) #movie #scifi #thriller +2026-11-21 imdb:tt2866360
+- [ ] In deze aflevering staan Koen en Kika langer stil bij Black Radio (2012) #podcast +2026-11-21 https://share.podimo.com/s/eMmGkdu6
