@@ -451,3 +451,4 @@ Tussen haakjes staat een notitie. #movie, #series of #podcast is het soort; ande
 - [ ] Coherence (2013, James Ward Byrkit, IMDb 7.2) #movie #scifi #thriller +2026-11-21 imdb:tt2866360
 - [ ] Black radio - Robert glasper jazz hiohop #podcast +2026-11-21
 - [ ] The Boroughs op #movie #sf #vind #andre #leuk +2026-11-22
+- [ ] The Tudors (2007–2010) #movie #hiatoroc #drama #andre +2026-11-22
