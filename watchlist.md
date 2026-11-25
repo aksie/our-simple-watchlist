@@ -452,3 +452,4 @@ Tussen haakjes staat een notitie. #movie, #series of #podcast is het soort; ande
 - [ ] Black radio - Robert glasper jazz hiohop #podcast +2026-11-21
 - [ ] The Boroughs op #movie #sf #vind #andre #leuk +2026-11-22
 - [ ] The Tudors (2007–2010) #movie #hiatoroc #drama #andre +2026-11-22
+- [ ] L'albero degli zoccoli #movie #curieus #tweeduidig #beeld #van #religie #die #zowel #kracht #geeft #en #tot #verdere #ontwikkeling #stimuleert #als #gelatenheid #tegenover #de #omstandigheden #dicteert. +2026-11-25
